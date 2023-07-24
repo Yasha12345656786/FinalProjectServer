@@ -1,3 +1,4 @@
+const DB = require('../utils/db');
 class Player{
     first_name;
     last_name;
@@ -15,6 +16,15 @@ class Player{
         this.username = username;
         this.triviaScore = triviaScore;
         this.memoryScore = memoryScore;
+    }
+
+    static async FindAllPlayers(){
+        return await new DB().FindAll('players');
+    }
+
+    static async FindByMemoryScore(memoryScore){
+        let query = {"memoryScore": memoryScore}
+        return await new DB().FindAll('players', query);
     }
 
 }

@@ -7,6 +7,6 @@ let server =  express();
 server.use(cors());
 
 
-
+server.use('/api/players',)
 
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`));

@@ -1,10 +1,26 @@
+const {MongoClient, ObjectId} = require('mongodb');
 class DB{
     db_uri;
     db_name;
+    client;
 
     constructor(){
         this.db_uri = "mongodb+srv://GUTS:jacob00045052@cluster0.epjctzx.mongodb.net/";
-        this.db_name="KenDvorim";
+        this.db_name = "KenDvorim";
+        this.client = new MongoClient(this.db_uri);
+    }
+
+    async FindAll(collection, query = {}, project = {}){
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+        } catch (error) {
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+        
     }
 
     
