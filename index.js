@@ -7,6 +7,6 @@ let server =  express();
 server.use(cors());
 
 
-server.use('/api/players',)
+server.use('/api/player',require('./routes/player.route'));
 
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`));

@@ -19,12 +19,13 @@ class Player{
     }
 
     static async FindAllPlayers(){
-        return await new DB().FindAll('players');
+        console.log(2);
+        return await new DB().FindAll('player');
     }
 
     static async FindByMemoryScore(memoryScore){
         let query = {"memoryScore": memoryScore}
-        return await new DB().FindAll('players', query);
+        return await new DB().FindAll('player', query);
     }
 
 }
