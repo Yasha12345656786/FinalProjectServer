@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('node:path'); 
 const cors = require('cors'); 
@@ -7,6 +8,6 @@ let server =  express();
 server.use(cors());
 
 
-server.use('/api/player',require('./routes/player.route'));
+server.use('/api/player',require('./routes/players.route'));
 
-server.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`http://localhost:${PORT}`)); 

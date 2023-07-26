@@ -19,13 +19,17 @@ class Player{
     }
 
     static async FindAllPlayers(){
-        console.log(2);
-        return await new DB().FindAll('player');
+        
+        return await new DB().FindAll('Player');
     }
 
     static async FindByMemoryScore(memoryScore){
-        let query = {"memoryScore": memoryScore}
-        return await new DB().FindAll('player', query);
+        let query = {"memoryScore": Number(memoryScore)}
+        return await new DB().FindAll('Player', query);
+    }
+    static async FindByTriviaScore(triviaScore){
+        let query = {"triviaScore": Number(triviaScore)}
+        return await new DB().FindAll('Player',query);
     }
 
 }
