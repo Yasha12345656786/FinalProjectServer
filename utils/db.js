@@ -51,8 +51,9 @@ class DB{
     async UpadateById(collection,id,doc){
         try {
             await this.client.connect();
+            console.log(id, doc);
             return await this.client.db(this.db_name).collection(collection).updateOne(
-                {id: new ObjectId(id)},
+                {_id: new ObjectId(id)},
                 {$set:{...doc}});
         } catch (error) {
             throw error;

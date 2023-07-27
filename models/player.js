@@ -31,8 +31,21 @@ class Player{
         let query = {"triviaScore": Number(triviaScore)}
         return await new DB().FindAll('Player',query);
     }
-    static async UpdatePlayersUsername(id, doc){
+    static async UpdatePlayersUsername(id, username){
+        let doc = {username:username}
         return await new DB().UpadateById('Player', id, doc);
+    }
+    static async AddNewPlayer(first_name,last_name,email,password,username,triviaScore,memoryScore){
+        let doc = {
+            first_name:first_name,
+            last_name:last_name,
+            email:email, 
+            password:password,
+            username:username,
+            triviaScore:Number(triviaScore),
+            memoryScore:Number(memoryScore)
+        }
+            return await new DB().Insert('Player',doc);
     }
 
 }
