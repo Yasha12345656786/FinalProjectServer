@@ -5,6 +5,7 @@ const cors = require('cors');
 const PORT = 5500;
 
 let server =  express(); 
+server.use(express.json());
 server.use(cors());
 
 

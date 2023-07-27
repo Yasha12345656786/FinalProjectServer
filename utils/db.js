@@ -24,6 +24,47 @@ class DB{
         }
         
     }
+    async FindOne(collection,  query = {}, project = {}){
+        try {
+             
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).findOne(query, project);
+        } catch (error) {
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+        
+    }
+    async Insert(collection, doc){
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).insertOne(doc);
+        } catch (error) {
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+    }
+    async UpadateById(collection,id,doc){
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).updateOne(
+                {id: new ObjectId(id)},
+                {$set:{...doc}});
+        } catch (error) {
+            throw error;
+        }
+        finally{
+            await this.client.close();
+
+        }
+
+
+    }
+
 
     
 
