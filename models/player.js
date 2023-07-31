@@ -1,4 +1,5 @@
 const DB = require('../utils/db');
+const bcrypt = require('bcrypt');
 class Player{
     first_name;
     last_name;
@@ -40,12 +41,34 @@ class Player{
             first_name:first_name,
             last_name:last_name,
             email:email, 
-            password:password,
+            password: await bcrypt.hash(password,10),
             username:username,
             triviaScore:Number(triviaScore),
             memoryScore:Number(memoryScore)
         }
             return await new DB().Insert('Player',doc);
+    }
+    static async Register(first_name,last_name,email,password,username,triviaScore,memoryScore){
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = await bcrypt.hash(password, 10);
+        this.username =  username;
+        this.triviaScore = triviaScore;
+        this.memoryScore =  memoryScore;
+        console.log(password,this.password);
+    }
+    static async Login(username, password){
+        let doc = {
+            username:username,
+            password:password
+        }
+        if(await new DB.FindAll('Player',bcrypt.compare(password,doc.password))&&  await new DB().FindAll('Player', doc.username))
+        {
+            return doc;
+        }else{
+            return null;
+        }
     }
 
 }

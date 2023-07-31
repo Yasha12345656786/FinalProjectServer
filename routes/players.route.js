@@ -1,3 +1,4 @@
+const Player = require('../models/player');
 const playerModel = require('../models/player');
 const PlayersRoute = require('express').Router();
 
@@ -57,5 +58,32 @@ PlayersRoute.post('/AddUser', async(req,res)=>{
        } catch (error) {
               res.status(500).json({error});
        }
-})
+});
+PlayersRoute.post('/register',async (req,res)=>{
+       try {
+            let {first_name, last_name, email, password, username, triviaScore, memoryScore} = req.body; 
+            console.log(first_name, last_name, email, password, username, triviaScore, memoryScore); 
+            Player.Register(first_name, last_name, email, password, username, triviaScore, memoryScore);
+            res.end();
+       } catch (error) {
+          res.status(500).json({error});
+       }
+});
+PlayersRoute.post('/login',async (req,res)=>{
+       try {
+            let {username,password} = req.body;
+            let player =  await Player.Login(username,password);
+            console.log(player);
+            if(!player){
+              res.status(401).json({msg:"BAD login :( "});
+            }
+            else{
+              res.status(200).json({msg:"successful login :)"});
+             
+            }          
+       } catch (error) {
+          res.status(500).json({error});
+         
+       }
+});
 module.exports = PlayersRoute; 
