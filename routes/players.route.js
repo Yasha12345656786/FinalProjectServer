@@ -1,11 +1,10 @@
 const Player = require('../models/player');
-const playerModel = require('../models/player');
 const PlayersRoute = require('express').Router();
 
 PlayersRoute.get('/',async (req,res) => {
        try {
               
-        let data = await playerModel.FindAllPlayers();
+        let data = await Player.FindAllPlayers();
        
         res.status(200).json(data);
        } catch (error) {
@@ -16,7 +15,7 @@ PlayersRoute.get('/memory/:memoryScore', async (req,res) => {
        try {
               let {memoryScore} = req.params;
               console.log(memoryScore);
-              let data = await playerModel.FindByMemoryScore(memoryScore);
+              let data = await Player.FindByMemoryScore(memoryScore);
               res.status(200).json(data);
        } catch (error) {
               res.status(500).json({error});
@@ -26,7 +25,7 @@ PlayersRoute.get('/trivia/:triviaScore', async (req,res)=>{
        try {
               let{triviaScore} = req.params;
               console.log(triviaScore);
-              let data = await playerModel.FindByTriviaScore(triviaScore);
+              let data = await Player.FindByTriviaScore(triviaScore);
               res.status(200).json(data);
        } catch (error) {
               res.status(500).json({error});
@@ -37,7 +36,7 @@ PlayersRoute.put('/:id',async(req,res)=>{
        try {
               let {id} = req.params;
               let {username} = req.body;
-              let data = await playerModel.UpdatePlayersUsername(id,username);
+              let data = await Player.UpdatePlayersUsername(id,username);
               res.status(200).json(data);
        } catch (error) {
               res.status(500).json({error});
@@ -52,8 +51,8 @@ PlayersRoute.post('/AddUser', async(req,res)=>{
               let {username} = req.body;
               let {triviaScore} = req.body;
               let {memoryScore} = req.body;
-              let data = await playerModel.AddNewPlayer(first_name,last_name,email,password,username,triviaScore,memoryScore)
-              res.status(200).json(data);
+              let data = await Player.AddNewPlayer(first_name,last_name,email,password,username,triviaScore,memoryScore)
+              res.status(201).json(data);
               
        } catch (error) {
               res.status(500).json({error});
@@ -62,9 +61,8 @@ PlayersRoute.post('/AddUser', async(req,res)=>{
 PlayersRoute.post('/register',async (req,res)=>{
        try {
             let {first_name, last_name, email, password, username, triviaScore, memoryScore} = req.body; 
-            console.log(first_name, last_name, email, password, username, triviaScore, memoryScore); 
-            Player.Register(first_name, last_name, email, password, username, triviaScore, memoryScore);
-            res.end();
+            let newPlayer =  await Player.Register(first_name, last_name, email, password, username, triviaScore, memoryScore);
+            res.status(201).json(newPlayer);
        } catch (error) {
           res.status(500).json({error});
        }
@@ -74,11 +72,11 @@ PlayersRoute.post('/login',async (req,res)=>{
             let {username,password} = req.body;
             let player =  await Player.Login(username,password);
             console.log(player);
-            if(!player){
+            if(!player){ 
               res.status(401).json({msg:"BAD login :( "});
             }
             else{
-              res.status(200).json({msg:"successful login :)"});
+              res.status(200).json({player});
              
             }          
        } catch (error) {

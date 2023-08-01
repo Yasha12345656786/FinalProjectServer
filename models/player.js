@@ -56,19 +56,21 @@ class Player{
         this.username =  username;
         this.triviaScore = triviaScore;
         this.memoryScore =  memoryScore;
-        console.log(password,this.password);
+        return await new DB().Insert('Player',{...this});
     }
     static async Login(username, password){
-        let doc = {
-            username:username,
-            password:password
-        }
-        if(await new DB.FindAll('Player',bcrypt.compare(password,doc.password))&&  await new DB().FindAll('Player', doc.username))
-        {
-            return doc;
-        }else{
-            return null;
-        }
+     let query = {username:username}
+     let player = await new DB().FindOne("Player",query);
+     if(!player || !(await bcrypt.compare(password,player.password))){
+        return null;}
+        this._id = player._id;
+        this.first_name = player.first_name;
+        this.last_name = player.last_name;
+        this.email = player.email;
+        this.username = player.username;
+        this.triviaScore = player.triviaScore;
+        this.memoryScore = player.memoryScore;
+     return {...this};
     }
 
 }
