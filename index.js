@@ -10,7 +10,7 @@ server.use(cors());
 
 server.use('/api/admin',require('./routes/admin.route'));
 server.use('/api/player',require('./routes/players.route'));
-server.use('/api/memoryGame',require('./routes/memoryGame.route'));
-server.use('/api/memoryGame',require('./routes/triviaGame.route'));
+//server.use('/api/memoryGame',require('./routes/memoryGame.route'));
+//server.use('/api/memoryGame',require('./routes/triviaGame.route'));
 
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`)); 
