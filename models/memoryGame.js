@@ -13,12 +13,24 @@ class MemoryGame {
         this.score = score;
 
     }
-    static n = 0;
 
     static async GetAllCards(gameID) {
         let query = { _id: new ObjectId(gameID) }
         let options = { projection: { cards: 1, _id:0 } }
         return await new DB().FindOne('MemoryGame', query, options);
+    }
+    static async AddCard(gameID,id,img){
+        let query = {_id: new ObjectId(gameID)}
+        let doc = {
+            id: id,
+            img:img
+        }
+        return await new DB().UpadateById('MemoryGame',query,doc)
+    }
+    static async GetMovesPerLevel(gameID){
+        let query = {_id:new ObjectId(gameID)}
+        let options = {projection:{MinMoves:1,_id:0}}
+        return await new DB().FindOne('MemoryGame',query,options);
     }
     static async GetCardById() {
         let query = { id: id }

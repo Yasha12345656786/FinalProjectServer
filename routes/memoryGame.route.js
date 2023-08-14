@@ -12,9 +12,22 @@ MemoryRoute.get('/:id/cards', async (req,res)=>{
 
 });
 
-MemoryRoute.get('/card/:id',async(req,res)=>{
+MemoryRoute.get('/:id/MinMoves',async (req,res)=>{
     try {
-        let data = await memoryGame.GetCardById();
+        let {id} = req.params;
+        let data = await memoryGame.GetMovesPerLevel(id);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({error});
+    }
+})
+
+MemoryRoute.put('/AddCard/:id',async(req,res)=>{
+    try {
+        let {_id} = req.params;
+        let {id} = req.body;
+        let {img} = req.body;
+        let data = await memoryGame.AddCard(_id,id,img)
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({error});
