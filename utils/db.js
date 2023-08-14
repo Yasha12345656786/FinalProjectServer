@@ -11,11 +11,11 @@ class DB{
         this.client = new MongoClient(this.db_uri);
     }
 
-    async FindAll(collection, query = {}, project = {}){
+    async FindAll(collection, query = {}, options = {}){
         try {
              
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).find(query, project).toArray();
+            return await this.client.db(this.db_name).collection(collection).find(query, options).toArray();
         } catch (error) {
             throw error;
         }
@@ -24,11 +24,10 @@ class DB{
         }
         
     }
-    async FindOne(collection,  query = {}, project = {}){
+    async FindOne(collection,  query = {}, options = {}){
         try {
-             
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).findOne(query, project);
+            return await this.client.db(this.db_name).collection(collection).findOne(query, options);
         } catch (error) {
             throw error;
         }
@@ -65,82 +64,81 @@ class DB{
 
 
     }
-async GetQuestion(collection, lvl){
-    try {
-        await this.client.connect();
-        question = "Questions";
-        return await this.client.db(this.db_name).collection(collection).findOne({
-            question:{lvl}
-        });
+// async GetQuestion(collection, lvl){
+//     try {
+//         await this.client.connect();
+//         question = "Questions";
+//         return await this.client.db(this.db_name).collection(collection).findOne({
+//             question:{lvl}
+//         });
         
-    } catch (error) {
-        throw error;
-    }
-    finally{
-        await this.client.close();
+//     } catch (error) {
+//         throw error;
+//     }
+//     finally{
+//         await this.client.close();
 
 
-    }
-}
-async GetAnswersDB(collection,  lvl){
-    try {
-        await this.client.connect();
-         answers = "Answers";
-        return await this.client.db(this.db_name).collection(collection).find({
-            answers:{lvl}
-        });
+//     }
+// }
+// async GetAnswersDB(collection,  lvl){
+//     try {
+//         await this.client.connect();
+//          answers = "Answers";
+//         return await this.client.db(this.db_name).collection(collection).find({
+//             answers:{lvl}
+//         });
         
-    } catch (error) {
-        throw error;
-    }
-    finally{
-        await this.client.close();
-    }
-}
-async GetCorrectAnswerDB(collection,  lvl){
-    try {
-        await this.client.connect();
-         answer = "CorrectAnswers";
-        return await this.client.db(this.db_name).collection(collection).find({
-            answer:{lvl}
-        });
+//     } catch (error) {
+//         throw error;
+//     }
+//     finally{
+//         await this.client.close();
+//     }
+// }
+// async GetCorrectAnswerDB(collection,  lvl){
+//     try {
+//         await this.client.connect();
+//          answer = "CorrectAnswers";
+//         return await this.client.db(this.db_name).collection(collection).find({
+//             answer:{lvl}
+//         });
         
-    } catch (error) {
-        throw error;
-    }
-    finally{
-        await this.client.close();
-    }
-}
-async GetAllCardsDB(collection, card){
-    try {
-        await this.client.connect();
-        cards = "cards";
-        return await this.client.db(this.db_name).collection(collection).find({
-            cards:{card}
-        });
-    } catch (error) {
-        throw error;
-    }
-    finally{
-        await this.client.close();
-    }
-}
-async GetCardByIdDB(collection,id){
-    try {
-        await this.client.connect();
+//     } catch (error) {
+//         throw error;
+//     }
+//     finally{
+//         await this.client.close();
+//     }
+// }
+// async GetAllCardsDB(collection){
+//     try {
+//         await this.client.connect();
+//         return await this.client.db(this.db_name).collection(collection).find({
+//             cards:{card}
+//         });
+//     } catch (error) {
+//         throw error;
+//     }
+//     finally{
+//         await this.client.close();
+//     }
+// }
+// async GetCardByIdDB(collection,id){
+//     try {
+//         await this.client.connect();
         
-        return await this.client.db(this.db_name).collection(collection).find({
-            "cards":{id}
-        });
-    } catch (error) {
-        throw error;
-    }
-    finally{
-        await this.client.close();
-    }
+//         return await this.client.db(this.db_name).collection(collection).find({
+//             "cards":{id}
+//         });
+//     } catch (error) {
+//         throw error;
+//     }
+//     finally{
+//         await this.client.close();
+//     }
 
-}
+// }
 
 }
 module.exports = DB;
