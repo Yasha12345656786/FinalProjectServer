@@ -22,7 +22,7 @@ MemoryRoute.get('/:id/MinMoves',async (req,res)=>{
     }
 })
 
-MemoryRoute.put('/AddCard/:id',async(req,res)=>{
+MemoryRoute.put('/:id/AddCard',async(req,res)=>{
     try {
         let {_id} = req.params;
         let {id} = req.body;
@@ -34,5 +34,12 @@ MemoryRoute.put('/AddCard/:id',async(req,res)=>{
         
     }
 });
+MemoryRoute.get('/:id/:Cardid/findCardByID', async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+})
 
 module.exports = MemoryRoute;

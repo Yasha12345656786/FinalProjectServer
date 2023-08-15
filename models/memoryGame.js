@@ -13,11 +13,19 @@ class MemoryGame {
         this.score = score;
 
     }
+    static async GetGame(gameID){
+        let query = {_id:new ObjectId(gameID)}
+        return await new DB().FindOne('MemoryGame',query);
+    }
 
     static async GetAllCards(gameID) {
         let query = { _id: new ObjectId(gameID) }
         let options = { projection: { cards: 1, _id:0 } }
         return await new DB().FindOne('MemoryGame', query, options);
+    }
+    static async GetCard(gameID){
+        let game = this.GetGame()
+
     }
     static async AddCard(gameID,id,img){
         let query = {_id: new ObjectId(gameID)}
@@ -32,9 +40,9 @@ class MemoryGame {
         let options = {projection:{MinMoves:1,_id:0}}
         return await new DB().FindOne('MemoryGame',query,options);
     }
-    static async GetCardById() {
-        let query = { id: id }
-        return await new DB().GetCardByIdDB('MemoryGame', query);
+    static async GetCardById(gameID, cardID) {
+        let query = { "cardID": cardID }
+        return await new DB().FindOne('MemoryGame', query);
 
     }
 }

@@ -1,41 +1,22 @@
 const triviaGame =  require('../models/triviaGame');
 const TriviaRoute = require('express').Router();
 
-TriviaRoute.get('/question/:lvl',async (req,res)=>{
+TriviaRoute.get('/:id/questions', async(req,res)=>{
     try {
-        let data = await triviaGame.GetOneQuestion();
+        let {id} = req.params;
+        let data = await triviaGame.GetAllQuestion(id);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({error});
     }
 });
-TriviaRoute.get('/answers/:lvl',async (req,res)=>{
+
+TriviaRoute.get('/:id/quetion', async(req,res)=>{
     try {
-        let data = await triviaGame.GetAnswers();
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({error});
-    }
-});
-TriviaRoute.get('/correctAnswers/:lvl',async (req,res)=>{
-    try {
-        let data = await triviaGame.GetCorrectAnswers();
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).json({error});
-    }
-});
-// TriviaRoute.post('/addQuestion', async(req,res)=>{
-//     try {
-//         answers;
-//     correctAnswers;
-//     levels;
-//     questions;
-//     scorePerQuestion
-//     } catch (error) {
+        let {id} = req.params;
         
-//     }
-
-// });
-
+    } catch (error) {
+        
+    }
+})
  

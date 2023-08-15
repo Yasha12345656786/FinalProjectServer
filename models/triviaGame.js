@@ -1,3 +1,4 @@
+const {ObjectId} = require('mongodb');
 const DB = require('../utils/db');
 class TriviaGame {
     answers;
@@ -13,25 +14,24 @@ class TriviaGame {
         this.questions = questions;
         this.scorePerQuestion = scorePerQuestion;
     }
-
-    static nq = 0;
-    static na = 0;
-    static nac = 0;
-
-    static async GetOneQuestion(){
-        let lvl = "lvl" + (++nq);
-        return await new DB().GetQuestion('TriviaGame', lvl);
-        
+    static async GetGame(gameID){
+        let query ={_id: new ObjectId(gameID)}
+        return await new DB().FindOne('TriviaGame',query);
     }
 
-    static async GetAnswers(){
-        let lvl = "lvl" + (++na);
-        return await new DB().GetAnswersDB('TriviaGame', lvl);
+    static async GetAllQuestion(gameID){
+        let query = {_id: new ObjectId(gameID)}
+        let options = {projection: {Questions:1,_id:0}}
+        return await new DB().FindOne('TriviaGame',query,options)
     }
-    static async GetCorrectAnswers(){
-        let lvl = "lvl" + (++nac);
-        return await new DB().GetCorrectAnswerDB('TriviaGame', lvl);
+    static async GetQuestionsByLvl(gameID){ 
+    let game = this.GetGame(gameID)
+    let query = game.Questions
+    let options ={projection:{Questions:lvl,_id:0}}
+    return await new DB().FindOne('TriviaGame',query, options)
     }
+
+   
 }
 
 module.exports = TriviaGame; 
