@@ -1,17 +1,16 @@
 const { ObjectId } = require('mongodb');
 const DB = require('../utils/db');
 class MemoryGame {
-    cards;
-    levels;
-    minMoves;
-    score;
+   level;
+   cards;
+   minMoves;
+   points;
 
-    constructor(cards, levels, minMoves, score) {
+    constructor(level, cards, minMoves, points) {
+        this.level = level;
         this.cards = cards;
-        this.levels = levels;
         this.minMoves = minMoves;
-        this.score = score;
-
+        this.points = points;
     }
     static async GetGame(gameID){
         let query = {_id:new ObjectId(gameID)}
@@ -19,8 +18,9 @@ class MemoryGame {
     }
 
     static async GetAllCards(gameID) {
-        let query = { _id: new ObjectId(gameID) }
-        let options = { projection: { cards: 1, _id:0 } }
+        let memoryGame = GetGame(gameID)
+        memoryGame.
+        let options = { }
         return await new DB().FindOne('MemoryGame', query, options);
     }
     static async GetCard(gameID){
