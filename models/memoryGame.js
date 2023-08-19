@@ -17,7 +17,7 @@ class MemoryGame {
         return await new DB().FindOne('MemoryGame',query);
     }
 
-    static async GetAllCards(gameID) {
+    static async GetAllCards(gameID,) {
         let memoryGame = GetGame(gameID);
         let query = 
         let options = {}
