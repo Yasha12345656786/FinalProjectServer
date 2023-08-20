@@ -24,10 +24,10 @@ class DB{
         }
         
     }
-    async FindOne(collection,  query = {}, options = {}){
+    async FindOne(collection,  query = {}, projection = {}){
         try {
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).findOne(query, options);
+            return await this.client.db(this.db_name).collection(collection).findOne(query, projection);
         } catch (error) {
             throw error;
         }

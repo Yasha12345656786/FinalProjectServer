@@ -62,5 +62,13 @@ MemoryRoute.get('/:id/:lvl/memoryGameLevel',async(req,res)=>{
         
 //     }
 // })
+MemoryRoute.get('/',async (req,res)=>{
+    try {
+        let data = await memoryGame.GetAllLevels();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({error});
+    }
+})
 
 module.exports = MemoryRoute;

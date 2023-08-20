@@ -6,7 +6,7 @@ class MemoryGame {
    minMoves;
    points;
 
-    constructor(level, cards, minMoves, points) {
+    constructor(levels, cards, minMoves, points) {
         this.levels = levels;
         this.cards = cards;
         this.minMoves = minMoves;
@@ -17,16 +17,13 @@ class MemoryGame {
         return await new DB().FindOne('MemoryGame',query);
     }
     static async GetMemoryGameLevel(gameID,lvl){
-       let query = this.GetGame(gameID);
-       let options = {
-        Levels: 
-            {$elemMatch:{lvl:lvl,query}}
-       }
-        return await new DB().FindAll('MemoryGame',options);
+       //let query = this.GetGame(gameID);
+       let projection = {Levels:{$elemMatch:{lvl:2}}};
+       const queryAns = await new DB().FindOne('MemoryGame',projection,projection);
+        return queryAns;
     }
-
     // static async GetAllCards(gameID,) {
-    //     let memoryGame = GetGame(gameID);
+    //     let memoryGame = GetGame(gameID);5
     //     let query = 
     //     let options = {}
     //     return await new DB().FindOne('MemoryGame', query, options);
@@ -51,6 +48,12 @@ class MemoryGame {
     static async GetCardById(gameID, cardID) {
         let query = { "cardID": cardID }
         return await new DB().FindOne('MemoryGame', query);
+
+    }
+    static async GetAllLevels(){
+        return await new DB().FindAll('MemoryGame');
+    }
+    static async GetLevelBylvl(lvl){
 
     }
 }
