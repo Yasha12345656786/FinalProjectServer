@@ -69,6 +69,16 @@ MemoryRoute.get('/',async (req,res)=>{
     } catch (error) {
         res.status(500).json({error});
     }
-})
+});
+MemoryRoute.get('/:lvl',async (req,res)=>{
+    try {
+        let {lvl} = req.params;
+        let data = await memoryGame.GetCardById(lvl);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({error});
+    }
+});
+
 
 module.exports = MemoryRoute;

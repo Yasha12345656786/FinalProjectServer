@@ -14,7 +14,6 @@ PlayersRoute.get('/',async (req,res) => {
 PlayersRoute.get('/memory/:memoryScore', async (req,res) => {
        try {
               let {memoryScore} = req.params;
-              console.log(memoryScore);
               let data = await Player.FindByMemoryScore(memoryScore);
               res.status(200).json(data);
        } catch (error) {

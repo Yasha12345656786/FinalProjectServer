@@ -1,13 +1,13 @@
 const { ObjectId } = require('mongodb');
 const DB = require('../utils/db');
 class MemoryGame {
-   levels;
+   lvl;
    cards;
    minMoves;
    points;
 
-    constructor(levels, cards, minMoves, points) {
-        this.levels = levels;
+    constructor(lvl, cards, minMoves, points) {
+        this.lvl = lvl;
         this.cards = cards;
         this.minMoves = minMoves;
         this.points = points;
@@ -54,7 +54,14 @@ class MemoryGame {
         return await new DB().FindAll('MemoryGame');
     }
     static async GetLevelBylvl(lvl){
+        let query = {"lvl":Number(lvl)}
+        return await new DB().FindAll('MemoryGame',query);
 
+    }
+    static async GetMinMovesBylvl(lvl){
+        let query={"lvl":Number(lvl)}
+        let options  = {projection:{Cards:1,id:0}}
+        return await new DB().FindOne('MemoryGame',query,options)
     }
 }
 
