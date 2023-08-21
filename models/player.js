@@ -34,7 +34,7 @@ class Player{
     }
     static async UpdatePlayersUsername(id, username){
         let doc = {username:username}
-        return await new DB().UpadateById('Player', id, doc);
+        return await new DB().UpdateById('Player', id, doc);
     }
     static async AddNewPlayer(first_name,last_name,email,password,username,triviaScore,memoryScore){
         let doc = {

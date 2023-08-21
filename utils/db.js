@@ -24,10 +24,10 @@ class DB{
         }
         
     }
-    async FindOne(collection,  query = {}, projection = {}){
+    async FindOne(collection,  query = {}, options = {}){
         try {
             await this.client.connect();
-            return await this.client.db(this.db_name).collection(collection).findOne(query, projection);
+            return await this.client.db(this.db_name).collection(collection).findOne(query, options);
         } catch (error) {
             throw error;
         }
@@ -47,7 +47,7 @@ class DB{
             await this.client.close();
         }
     }
-    async UpadateById(collection,id,doc){
+    async UpdateById(collection,id,doc){
         try {
             await this.client.connect();
             console.log(id, doc);

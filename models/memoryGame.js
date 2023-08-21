@@ -2,14 +2,14 @@ const { ObjectId } = require('mongodb');
 const DB = require('../utils/db');
 class MemoryGame {
    lvl;
-   cards;
-   minMoves;
+   Cards;
+   MinMoves;
    points;
 
-    constructor(lvl, cards, minMoves, points) {
+    constructor(lvl, Cards, MinMoves, points) {
         this.lvl = lvl;
-        this.cards = cards;
-        this.minMoves = minMoves;
+        this.Cards = Cards
+        this.MinMoves = MinMoves;
         this.points = points;
     }
     static async GetGame(gameID){
@@ -60,8 +60,27 @@ class MemoryGame {
     }
     static async GetMinMovesBylvl(lvl){
         let query={"lvl":Number(lvl)}
-        let options  = {projection:{Cards:1,id:0}}
+        let options  = {projection:{MinMoves:1,lvl:0}}
         return await new DB().FindOne('MemoryGame',query,options)
+    }
+    static async GetPointsByLvl(lvl){
+        let query={"lvl":Number(lvl)}
+        let options = {projection:{points:1,id:0}}
+        return await new DB().FindOne('MemoryGame',query,options)
+    }
+    static async AddLevel( lvl,Cards,MinMoves,points){
+        let doc = {
+            lvl:lvl,
+            Cards:Cards,
+            MinMoves:MinMoves,
+            points:Number(points)
+        }
+
+        return await new DB().Insert('MemoryGame',doc);
+    }
+    static async ChangeCardsByLvl(id,Cards){
+        let doc = {Cards:Cards}
+        return await new DB.UpdateById('MemoryGame', id, doc);
     }
 }
 
