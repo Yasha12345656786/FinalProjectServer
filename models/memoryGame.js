@@ -78,8 +78,13 @@ class MemoryGame {
 
         return await new DB().Insert('MemoryGame',doc);
     }
-    static async ChangeCardsByLvl(id,Cards){
-        let doc = {Cards:Cards}
+    static async EditLevelById(id, lvl, Cards, MinMoves, points){
+        let doc = {
+            lvl:Number(lvl),
+            Cards:Cards,
+            MinMoves:Number(MinMoves),
+            points:Number(points)
+        }
         return await new DB().UpdateById('MemoryGame', id, doc);
     }
     static async GetNextGameByLvl(lvl){

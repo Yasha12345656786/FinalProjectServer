@@ -7,7 +7,6 @@ export default function App() {
   return (
  <>
   <BrowserRouter>
-  <AppHeader/>
   <Routes>
     <Route path="/" element = {<Login/>}/>
   </Routes>

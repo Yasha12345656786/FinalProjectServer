@@ -1,34 +1,45 @@
 const {ObjectId} = require('mongodb');
 const DB = require('../utils/db');
 class TriviaGame {
-    answers;
-    correctAnswers;
-    levels;
-    questions;
-    scorePerQuestion;
+    lvl;
+    q;
+    Answers;
+    points;
 
-    constructor(answers, correctAnswers, levels, questions, scorePerQuestion){
-        this.answers = answers;
-        this.correctAnswers = correctAnswers;
-        this.levels = levels;
-        this.questions = questions;
-        this.scorePerQuestion = scorePerQuestion;
+    constructor( lvl, q, Answers, points){
+        this.lvl = lvl;
+        this.q = q;
+        this.Answers = Answers;
+        this.points = points;
     }
-    static async GetGame(gameID){
-        let query ={_id: new ObjectId(gameID)}
+    static async GetAllLevels(){
+        return await new DB().FindAll('TriviaGame');
+    }
+    static async GetLevelBylvl(lvl){
+        let query = {"lvl":Number(lvl)}
+        return await new DB().FindAll('TriviaGame',query);
+    }
+    static async AddLevel( lvl, q, Answers, points){
+        let doc={
+            lvl:Number(lvl),
+            q:q,
+            Answers:Answers,
+            points:Number(points)
+        }
+        return await new DB().Insert('TriviaGame',doc);
+    }
+    static async EditLevelById(id,lvl, q, Answers, points){
+        let doc = {
+            lvl:Number(lvl),
+            q:q,
+            Answers:Answers,
+            points:Number(points)
+        }
+        return await new DB().UpdateById('TriviaGame', id, doc);
+    }
+    static async GetNextLevelBylvl(lvl){
+        let query = {lvl:lvl+1}
         return await new DB().FindOne('TriviaGame',query);
-    }
-
-    static async GetAllQuestion(gameID){
-        let query = {_id: new ObjectId(gameID)}
-        let options = {projection: {Questions:1,_id:0}}
-        return await new DB().FindOne('TriviaGame',query,options)
-    }
-    static async GetQuestionsByLvl(gameID){ 
-    let game = this.GetGame(gameID)
-    let query = game.Questions
-    let options ={projection:{Questions:lvl,_id:0}}
-    return await new DB().FindOne('TriviaGame',query, options)
     }
 
    
