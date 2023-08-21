@@ -110,12 +110,21 @@ MemoryRoute.post('/AddLevel',async(req,res)=>{
     }
 });
 //tried it also with lvl
-MemoryRoute.put('ChangeCardsByLvl/:lvl',async(req,res)=>{
+MemoryRoute.put('/ChangeCardsByLvl/:id',async(req,res)=>{
     try {
         let {id} = req.params;
         let {Cards} = req.body;
         let data = await memoryGame.ChangeCardsByLvl(id,Cards);
         res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({error});
+    }
+});
+MemoryRoute.get('/GetNextGameByLvl/:lvl',async(req,res)=>{
+    try {
+        let{lvl}= req.params;
+        let game = await memoryGame.GetNextGameByLvl(Number(lvl));
+        res.status(200).json(game);
     } catch (error) {
         res.status(500).json({error});
     }

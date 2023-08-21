@@ -80,7 +80,11 @@ class MemoryGame {
     }
     static async ChangeCardsByLvl(id,Cards){
         let doc = {Cards:Cards}
-        return await new DB.UpdateById('MemoryGame', id, doc);
+        return await new DB().UpdateById('MemoryGame', id, doc);
+    }
+    static async GetNextGameByLvl(lvl){
+        let query = {lvl:lvl+1}
+        return await new DB().FindOne('MemoryGame',query);
     }
 }
 
