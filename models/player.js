@@ -72,6 +72,7 @@ class Player{
         this.memoryScore = player.memoryScore;
      return {...this};
     }
+    static async AddPoints()
 
 }
 
