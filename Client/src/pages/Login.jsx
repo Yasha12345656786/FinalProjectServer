@@ -23,12 +23,12 @@ export default function Login() {
     }
     const CheckUserName=()=>{
         check = false;
-        if(username.length < 60 && username.length > 0){
+        if(username.length < 10 && username.length > 0){
             check = true;
         } 
         for (let index = 0; index < username.length; index++) {
           const element = username[index];
-          if (element >= 'A' && element <='Z' || element >= 'a' && element <='z') {
+          if (element >= 'A' && element <='Z' || element >= 'a' && element <='z' && element >= '0' || element <= '9' ) {
             continue;
           }
           else{check = false
@@ -43,7 +43,7 @@ export default function Login() {
     }
     count = 0;
     for (let index = 0; index < password.length; index++) {
-       if (password[index] >= '!' && password[index] <= '/' || password[index] >= ':' && password[index] <= '@' || password[index] >= '[' && password[index] <= '`' || password[index] >= '{' && password[index] <= '~' || password[index] >= 'A' || password[index] <= 'Z' || password[index] >= 'A' || password[index] <= '97'||password[index] >= '0' && password[index] <= '9' && count != 1) {
+       if (element >= 'A' && element <='Z' || element >= 'a' && element <='z' && element >= '0' || element <= '9' )  {
          count++;
          check = true;
        }           
