@@ -9,8 +9,8 @@ export default function Login() {
          CheckUserName();
          CheckPassWord();
          let admin = {username, password};
-        let res = await fetch('http://localhost:5500/api/admin/login', {
-            mehod:'POST',
+        let res = await fetch('/api/admin/login', {
+            method:'POST',
             headers:{
                 Accept:"application/json",
                 "Content-Type":"application/json",

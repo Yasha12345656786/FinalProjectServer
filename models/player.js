@@ -80,7 +80,9 @@ class Player{
         else{
             player.triviaScore += score;
         }
-        return await new DB().UpdateById('Player',id,player);
+        await new DB().UpdateById('Player',id,player);
+       return player;
+        
     }
     
 
