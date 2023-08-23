@@ -72,7 +72,17 @@ class Player{
         this.memoryScore = player.memoryScore;
      return {...this};
     }
-    static async AddPoints()
+    static async AddPoints(id,type,score){
+        let player = await new DB().FindOneById('Player',id);
+        if (type ==  0) {
+            player.memoryScore += score;
+        } 
+        else{
+            player.triviaScore += score;
+        }
+        return await new DB().UpdateById('Player',id,player);
+    }
+    
 
 }
 

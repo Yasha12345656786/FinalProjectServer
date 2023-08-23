@@ -64,6 +64,18 @@ class DB{
 
 
     }
+    async FindOneById(collection,  id){
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).findOne({_id:new ObjectId(id)});
+        } catch (error) {
+            throw error;
+        }
+        finally{
+            await this.client.close();
+        }
+        
+    }
 }
 module.exports = DB;
 

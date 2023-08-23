@@ -83,4 +83,13 @@ PlayersRoute.post('/login',async (req,res)=>{
          
        }
 });
+PlayersRoute.post('/AddPoints',async(req,res)=>{
+       try {
+              let {id,type,score}=req.body;
+              let player = await Player.AddPoints(id,type,score);
+              res.status(200).json({player});
+       } catch (error) {
+        res.status(500).json({error});
+       }
+})
 module.exports = PlayersRoute; 
