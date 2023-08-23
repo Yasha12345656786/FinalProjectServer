@@ -23,6 +23,9 @@ class Player{
         
         return await new DB().FindAll('Player');
     }
+    static async GetPlayerById(id){
+        return await new DB().FindOneById('Player',id);
+    }
 
     static async FindByMemoryScore(memoryScore){
         let query = {"memoryScore": Number(memoryScore)}
@@ -33,7 +36,15 @@ class Player{
         return await new DB().FindAll('Player',query);
     }
     static async UpdatePlayersUsername(id, username){
-        let doc = {username:username}
+        let doc = {
+            username:username
+        }
+        return await new DB().UpdateById('Player', id, doc);
+    }
+    static async UpdatePlayersPassword(id, password){
+        let doc = {
+            password: await bcrypt.hash(password,10)
+        }
         return await new DB().UpdateById('Player', id, doc);
     }
     static async AddNewPlayer(first_name,last_name,email,password,username,triviaScore,memoryScore){

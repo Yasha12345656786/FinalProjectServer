@@ -11,6 +11,16 @@ PlayersRoute.get('/',async (req,res) => {
         res.status(500).json({error});
        }
 });
+PlayersRoute.get('/getPlayerById/:id',async(req,res)=>{
+       try {
+              let {id} = req.params;
+              let data = await Player.GetPlayerById(id);
+              res.status(200).json(data);
+       } catch (error) {
+              res.status(500).json({error});
+              
+       }
+});
 PlayersRoute.get('/memory/:memoryScore', async (req,res) => {
        try {
               let {memoryScore} = req.params;
@@ -31,11 +41,21 @@ PlayersRoute.get('/trivia/:triviaScore', async (req,res)=>{
        }
 });
 
-PlayersRoute.put('/:id',async(req,res)=>{
+PlayersRoute.put('/updateUsername/:id',async(req,res)=>{
        try {
               let {id} = req.params;
               let {username} = req.body;
               let data = await Player.UpdatePlayersUsername(id,username);
+              res.status(200).json(data);
+       } catch (error) {
+              res.status(500).json({error});
+       }
+});
+PlayersRoute.put('/updatePassword/:id',async(req,res)=>{
+       try {
+              let {id} = req.params;
+              let {password} = req.body;
+              let data = await Player.UpdatePlayersPassword(id, password);
               res.status(200).json(data);
        } catch (error) {
               res.status(500).json({error});

@@ -9,14 +9,6 @@ export default function Login() {
          CheckUserName();
          CheckPassWord();
          let admin = {username, password};
-        let res = await fetch('/api/admin/login', {
-            method:'POST',
-            headers:{
-                Accept:"application/json",
-                "Content-Type":"application/json",
-            },
-            body: JSON.stringify(admin)
-        });
         let data = await res.json();
         console.log(data);
         alert('welcome' + data.username);
@@ -28,7 +20,7 @@ export default function Login() {
         } 
         for (let index = 0; index < username.length; index++) {
           const element = username[index];
-          if (element >= 'A' && element <='Z' || element >= 'a' && element <='z' && element >= '0' || element <= '9' ) {
+          if (element >= 'A' || element <='Z' && element >= 'a' || element <='z' && element >= '0' || element <= '9' ) {
             continue;
           }
           else{check = false
