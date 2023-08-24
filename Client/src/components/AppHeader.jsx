@@ -16,7 +16,7 @@ export default function AppHeader() {
             </li>
 
             <li>
-              <Link to="/triviaGameMenu">Trivia Game</Link>
+              <Link to="/TriviaGameMenu">Trivia Game</Link>
             </li>
         </ul>
     </nav>

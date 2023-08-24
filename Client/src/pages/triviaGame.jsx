@@ -1,44 +1,50 @@
-import React, { useContext, useState, useEffect }  from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TriviaContext } from '../Context/TriviaGameContext';
-import {AdminContext} from '../Context/AdminContext';
+import { AdminContext } from '../Context/AdminContext';
 
 
-export default function triviaGame() {
-  const {currentQuestion,UpdateScore}= useContext(TriviaContext);
-  const {admin} = useContext(AdminContext);
+export default function TriviaGame() {
+  const { currentQuestion, UpdateScore } = useContext(TriviaContext);
+  const { admin } = useContext(AdminContext);
 
-  const AnswerPressed = (answer)=>{
+  const AnswerPressed = (answer) => {
     if (!answer.correct) {
-      UpdateScore(admin._id,0);
+      UpdateScore(admin._id, 0);
     }
-    else{
-      UpdateScore(admin._id,answer.points)
+    else {
+      UpdateScore(admin._id, answer.points)
     }
   }
+  function renderContent() {
+    return (<> <h3>{currentQuestion?.lvl}</h3>
+      <h3>{admin.triviaScore}</h3>
+      <h1>
+        {currentQuestion?.q}
+      </h1>
+      <div>
+        {
+          currentQuestion?.Answers?.map((answer, index) => {
+            <button key={index} onProgress={() => AnswerPressed(answer)}>
+              <h5>
+                {answer.value}
+              </h5>
+            </button>
+
+          })
+
+        }
+      </div>
+    </>)
+  }
+
   return (
     <>
-    <div>triviaGame</div>
 
-    <p>{currentQuestion.lvl}</p>
-    <p>{admin.triviaScore}</p>
+      <div>TriviaGame</div>
+      {!currentQuestion.lvl ?
+        <div>loading</div> :
+       renderContent()}
 
-     <h1>
-      {currentQuestion.q}
-     </h1>
-
-     <div>
-      {
-        currentQuestion.Answers.map((answer,index)=>{
-          <button key ={index} onProgress={()=> AnswerPressed(answer)}>
-          <h5>
-            {answer.value}
-          </h5>
-          </button>
-
-        })
-
-      }
-     </div>
-     </>
+    </>
   )
 }

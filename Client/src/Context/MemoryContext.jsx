@@ -1,24 +1,26 @@
 import {createContext, useState, useEffect} from "react";
-export const TriviaContext = createContext();
-export default function TriviaContextProvider({children}){
+export const MemoryContext = createContext();
 
-    const [currentQuestion, setCurrentQuestion] = useState({});
-    const [currentLevel, setCurrentLevel] = useState(0);
+export default function MemoryContextProvider({children}){
+    const [currentCards, SetCurrentCards] = useState({});
+    const [currentLevel, SetCurrentLevel] = useState(0);
+    const [currentMoves, SetCurrentMoves] = useState(0);
 
-    const GetNextQuestion = async () =>{
+
+    const GetNextCards = async () =>{
         try {
-            let response = await fetch(`/api/TriviaGame/GetNextLevelBylvl/${currentLevel}`);
+            let response = await fetch(`/api/memoryGame/GetNextLevelBylvl/${currentLevel}`);
             if (response.ok) {
                 let data = await response.json();
-                setCurrentQuestion(data);
+                SetCurrentCards(data);
                 
-            } 
+            }
         } catch (error) {
             
         }
     }
 
-    const UpdateScore = async (id,score) =>{
+    const UpdateScore = async (id,score)=>{
         try {
             let response = await fetch('/api/admin/AddPoints',{
                 method:'POST',
@@ -27,32 +29,30 @@ export default function TriviaContextProvider({children}){
                 },
                 body:JSON.stringify({
                     id:id,
-                    type:1,
+                    type:0,
                     score:score
                 })
             });
             if (response.ok) {
-                setCurrentLevel(prev => +1);
+                SetCurrentLevel(prev =>+1);
                 
             }
         } catch (error) {
             
         }
     }
-    useEffect(() => {
-        GetNextQuestion();
-        //GetNextAnswers();
-    }, [currentLevel]);
+    useEffect(()=>{
+        GetNextCards();
+    },[currentLevel]);
 
     const value = {
-        currentQuestion,
+        currentCards,
         UpdateScore
     }
 
     return(
-        <TriviaContext.Provider value = {value}>
+        <MemoryContextProvider value = {value}>
             {children}
-        </TriviaContext.Provider>
+        </MemoryContextProvider>
     )
-
 }
