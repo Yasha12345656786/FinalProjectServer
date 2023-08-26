@@ -41,6 +41,7 @@ export default function MemoryContextProvider({children}){
             
         }
     }
+ 
     useEffect(()=>{
         GetNextCards();
     },[currentLevel]);
