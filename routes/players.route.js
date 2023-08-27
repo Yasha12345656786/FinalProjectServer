@@ -111,5 +111,14 @@ PlayersRoute.post('/AddPoints',async(req,res)=>{
        } catch (error) {
         res.status(500).json({error});
        }
+});
+PlayersRoute.get('/GetByEmail/:email', async(req,res)=>{
+       try {
+              let{email} = req.params;
+              let data = await Player.FindByEmail(email);
+              res.status(200).json(data);
+       } catch (error) {
+              res.status(500).json({error});
+       }
 })
 module.exports = PlayersRoute; 

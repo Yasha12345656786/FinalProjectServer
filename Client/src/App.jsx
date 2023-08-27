@@ -6,6 +6,7 @@ import TriviaGameMenu from './components/triviaGameMenu';
 import TriviaGame from './pages/triviaGame';
 import TriviaContextProvider from './Context/TriviaGameContext';
 import AdminContextProvider from './Context/AdminContext';
+import BeeInfoPage from './pages/BeeInfoPage';
 export default function App() {
   return (
     <>
@@ -13,6 +14,7 @@ export default function App() {
           <TriviaContextProvider>
           <BrowserRouter>
             <Routes>
+              <Route path="/BeeInfoPage" element={<BeeInfoPage/>}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
               <Route path="/TriviaGame" element={<TriviaGame />} />
               <Route path="/" element={<Login />} />

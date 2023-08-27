@@ -95,6 +95,10 @@ class Player{
        return player;
         
     }
+    static async FindByEmail(email){
+        let query = {email:email}
+        return await new DB().FindOne('Player',query);
+    }
     
 
 }
