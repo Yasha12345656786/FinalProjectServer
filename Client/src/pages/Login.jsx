@@ -8,7 +8,7 @@ export default function Login() {
   async function Submit(event) {
     event.preventDefault();
     let admin = { username, password };
-    let res = await fetch("http://5500/api/admin/login", {
+    let res = await fetch("/api/admin/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
