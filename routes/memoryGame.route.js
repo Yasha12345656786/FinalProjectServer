@@ -72,7 +72,7 @@ MemoryRoute.get("/GetNextGameByLvl/:lvl", async (req, res) => {
     res.status(500).json({ error });
   }
 });
-MemoryGame.get("/GetCards/:lvl", async (req, res) => {
+MemoryRoute.get("/GetCards/:lvl", async (req, res) => {
   try {
     let { lvl } = req.params;
     let data = await memoryGame.GetCards(Number(lvl));
