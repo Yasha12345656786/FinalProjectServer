@@ -1,7 +1,7 @@
-const { default: MemoryGame } = require("../Client/src/pages/MemoryGame");
+
 const memoryGame = require("../models/memoryGame");
 const MemoryRoute = require("express").Router();
-
+("");
 MemoryRoute.get("/", async (req, res) => {
   try {
     let data = await memoryGame.GetAllLevels();
