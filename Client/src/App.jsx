@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import AppHeader from './components/AppHeader';
 import TriviaGameMenu from './components/triviaGameMenu';
 import TriviaGame from './pages/TriviaGame';
 import TriviaContextProvider from './Context/TriviaGameContext';
