@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "buildClient":"cd Client && pnpm install && pnpm run build",
-    "build":"pnpm install && pnpm run buildClient"
+    "buildClient": "cd Client && pnpm install && pnpm run build",
+    "build": "pnpm install && pnpm run buildClient"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "mongodb": "^5.7.0"
   },
   "devDependencies": {
+    "@locator/runtime": "^0.3.1",
     "nodemon": "^3.0.1"
   }
 }
