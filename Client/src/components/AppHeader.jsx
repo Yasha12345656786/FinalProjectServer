@@ -11,20 +11,15 @@ export default function AppHeader() {
       <h1>KenDvoasdasdrim</h1>
       <nav>
         <ul>
-          <li>
-            <Link to="/">sadasLogin</Link>
-          </li>
-          {login && (
-            <>
-              <li>
-                <Link to="/memoryGameMenu">Measdmsssory Game</Link>
-              </li>
+          <>
+            <li>
+              <Link to="/memoryGameMenu">Measdmsssory Game</Link>
+            </li>
 
-              <li>
-                <Link to="/TriviaGameMenu">Trivia Game</Link>
-              </li>
-            </>
-          )}
+            <li>
+              <Link to="/TriviaGameMenu">Trivia Game</Link>
+            </li>
+          </>
         </ul>
       </nav>
     </>
