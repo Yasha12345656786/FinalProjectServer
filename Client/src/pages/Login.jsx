@@ -5,17 +5,28 @@ import { redirect } from "react-router-dom";
 export default function Login() {
   const [username, SetUsername] = useState('');
   const [password, SetPassword] = useState('');
+
+
   async function Submit(event) {
-    event.preventDefault();
+    event.preventDefault()
+   
+
+    const a={
+    
+    }
+  
     let admin = { username, password };
-    let res = await fetch("/api/admin/login", {
+    console.log(admin);
+    let res = await fetch(`http://localhost:5500/api/admin/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      
       body: JSON.stringify(admin),
     });
+
     let data = await res.json();
     console.log(data);
     // const isSuccesful = await Login(username, password);

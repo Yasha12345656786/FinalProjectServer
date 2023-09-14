@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path'); 
 const cors = require('cors'); 
 const PORT = process.env.PORT || 5500;
-
+const mongoose = require('mongoose');
 let server =  express(); 
 server.use(express.json());
 server.use(cors());
@@ -21,4 +21,16 @@ server.get('/*', async (req, res) => {
       res.status(500).json({error});
     }
   });
+  const mongoURI = 'mongodb+srv://GUTS:jacob00045052@cluster0.epjctzx.mongodb.net/?retryWrites=true&w=majority;' // Replace with your MongoDB URI
+
+// Connect to MongoDB using Mongoose
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+  // Start your Express server here
+
+});
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`)); 
