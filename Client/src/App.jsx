@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import TriviaGameMenu from './components/triviaGameMenu';
-import TriviaGame from './pages/TriviaGame.jsx';
+import TriviaGame from './pages/TriviaGame';
 
 import TriviaContextProvider from './Context/TriviaGameContext';
 import AdminContextProvider from './Context/AdminContext';
