@@ -1,4 +1,3 @@
-const nodemailer = require('nodemailer');
 require('dotenv').config();
 const express = require('express');
 const path = require('path'); 
@@ -15,13 +14,7 @@ server.use('/api/player',require('./routes/players.route'));
 server.use('/api/memoryGame',require('./routes/memoryGame.route'));
 server.use('/api/triviaGame',require('./routes/triviaGame.route')); 
 //server.use('/api/beeInfoPages',require('./routes/beeInfoPage.route'));
-const transporter = nodemailer.createTransport({
-  service: 'Gmail', // Update with your email service
-  auth: {
-    user: 'your-email@gmail.com', // Update with your email
-    pass: 'your-password', // Update with your email password
-  },
-});
+
 server.get('/*', async (req, res) => {
     try {
       res.status(200).sendFile(path.join(__dirname, 'Client','dist', 'index.html'));
@@ -31,8 +24,9 @@ server.get('/*', async (req, res) => {
   });
   const secretKey = 'your-secret-key';
   const mongoURI = 'mongodb+srv://GUTS:jacob00045052@cluster0.epjctzx.mongodb.net/?retryWrites=true&w=majority;' // Replace with your MongoDB URI
-  app.post('/forgot-password', (req, res) => {
-    const { email } = req.body;
+  
+server.post('/forgot-password', (req, res) => {
+    const { email,users } = req.body;
   
     // Check if the email exists in your database
     const user = users.find((user) => user.email === email);

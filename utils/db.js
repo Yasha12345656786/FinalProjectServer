@@ -64,6 +64,20 @@ class DB {
       await this.client.close();
     }
   }
+  async UpdateByemail(collection, email, doc) {
+    try {
+      await this.client.connect();
+      console.log(email, doc);
+      return await this.client
+        .db(this.db_name)
+        .collection(collection)
+        .updateOne({email:email }, { $set: { ...doc } });
+    } catch (error) {
+      throw error;
+    } finally {
+      await this.client.close();
+    }
+  }
   async FindOneById(collection, id) {
     try {
       await this.client.connect();
