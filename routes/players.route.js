@@ -71,22 +71,23 @@ PlayersRoute.post("/updatePassword", async (req, res) => {
   //   }
 });
 PlayersRoute.post("/AddUser", async (req, res) => {
+  console.log(req);
   try {
     let { first_name } = req.body;
     let { last_name } = req.body;
     let { email } = req.body;
     let { password } = req.body;
     let { username } = req.body;
-    let { triviaScore } = req.body;
-    let { memoryScore } = req.body;
+    let { triviaScore } = Number(0);
+    let { memoryScore } = Number(0);
     let data = await Player.AddNewPlayer(
       first_name,
       last_name,
       email,
       password,
       username,
-      triviaScore,
-      memoryScore
+      triviaScore=0,
+      memoryScore=0
     );
     res.status(201).json(data);
   } catch (error) {
@@ -119,6 +120,7 @@ PlayersRoute.post("/register", async (req, res) => {
   }
 });
 PlayersRoute.post("/login", async (req, res) => {
+  console.log(req);
   try {
     let { username, password } = req.body;
     let player = await Player.Login(username, password);

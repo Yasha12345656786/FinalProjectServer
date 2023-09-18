@@ -73,35 +73,18 @@ class Player {
       first_name: first_name,
       last_name: last_name,
       email: email,
-      password: await bcrypt.hash(password, 10),
+      password:  password,
       username: username,
       triviaScore: Number(triviaScore),
       memoryScore: Number(memoryScore),
     };
     return await new DB().Insert("Player", doc);
   }
-  static async Register(
-    first_name,
-    last_name,
-    email,
-    password,
-    username,
-    triviaScore,
-    memoryScore
-  ) {
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.email = email;
-    this.password = await bcrypt.hash(password, 10);
-    this.username = username;
-    this.triviaScore = triviaScore;
-    this.memoryScore = memoryScore;
-    return await new DB().Insert("Player", { ...this });
-  }
+
   static async Login(username, password) {
     let query = { username: username };
     let player = await new DB().FindOne("Player", query);
-    if (!player || !(await bcrypt.compare(password, player.password))) {
+    if (!player || !(password, player.password)) {
       return null;
     }
     this._id = player._id;
