@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import TriviaGameMenu from './components/triviaGameMenu';
 // import TriviaGame from './pages/TriviaGame';
-import FoegotPassword from "./pages/FoegotPassword";
+import FoegotPassword from "./pages/ForgotPassword";
 import TriviaContextProvider from './Context/TriviaGameContext';
 import AdminContextProvider from './Context/AdminContext';
 import BeeInfoPage from './pages/BeeInfoPage';
@@ -17,7 +17,7 @@ export default function App() {
               <Route path="/BeeInfoPage" element={<BeeInfoPage/>}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
               {/* <Route path="/TriviaGame" element={<TriviaGame/>} /> */}
-              <Route path="/PlyerFoegotPassword" element={<FoegotPassword />} />
+              <Route path="/PlayerForgotPassword" element={<FoegotPassword />} />
               <Route path="/" element={<Login />} />
             </Routes>
           </BrowserRouter>      

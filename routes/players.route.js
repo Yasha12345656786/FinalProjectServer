@@ -39,12 +39,15 @@ PlayersRoute.get("/trivia/:triviaScore", async (req, res) => {
   }
 });
 
-PlayersRoute.put("/updateUsername/:id", async (req, res) => {
+PlayersRoute.put("/updateUsername", async (req, res) => {
+  const { email, username } = req.body;
   try {
-    let { id } = req.params;
-    let { username } = req.body;
-    let data = await Player.UpdatePlayersUsername(id, username);
-    res.status(200).json(data);
+    const player = await Player.FindByEmail(email);
+    if (!player) {
+      return res.status(404).json({ message: "Player Wasn't found, Try Again" });
+    }
+    await Player.UpdatePlayersPassword(player._id, username);
+    res.status(200).json({ message: "username update" });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -54,7 +57,7 @@ PlayersRoute.post("/updatePassword", async (req, res) => {
   try {
     const player = await Player.FindByEmail(email);
     if (!player) {
-      return res.status(404).json({ message: "Player dont found" });
+      return res.status(404).json({ message: "Player Wasn't found, Try Again" });
     }
     await Player.UpdatePlayersPassword(player._id, password);
     res.status(200).json({ message: "password update" });
