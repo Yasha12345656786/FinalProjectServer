@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function FoegotUsername() {
+function ForgotUsername() {
   const [email, SetEmail] = useState("");
   const [username, SetUsername] = useState("");
 
@@ -47,4 +47,4 @@ function FoegotUsername() {
     </div>
   );
 }
-export default FoegotPassword;
+export default ForgotUsername;

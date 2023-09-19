@@ -1,28 +1,36 @@
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import TriviaGameMenu from './components/triviaGameMenu';
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import TriviaGameMenu from "./components/triviaGameMenu";
 // import TriviaGame from './pages/TriviaGame';
-import FoegotPassword from "./pages/ForgotPassword";
-import TriviaContextProvider from './Context/TriviaGameContext';
-import AdminContextProvider from './Context/AdminContext';
-import BeeInfoPage from './pages/BeeInfoPage';
+import ForgotPassword from "./pages/ForgotPassword";
+import ForgotUsername from "./pages/ForgotUsername";
+import TriviaContextProvider from "./Context/TriviaGameContext";
+import AdminContextProvider from "./Context/AdminContext";
+import BeeInfoPage from "./pages/BeeInfoPage";
 export default function App() {
   return (
     <>
-        <AdminContextProvider>
-          <TriviaContextProvider>
+      <AdminContextProvider>
+        <TriviaContextProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/BeeInfoPage" element={<BeeInfoPage/>}></Route>
+              <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
               {/* <Route path="/TriviaGame" element={<TriviaGame/>} /> */}
-              <Route path="/PlayerForgotPassword" element={<FoegotPassword />} />
+              <Route
+                path="/PlayerForgotPassword"
+                element={<ForgotPassword />}
+              />
+              <Route
+                path="/PlayerForgotUsername"
+                element={<ForgotUsername />}
+              />
               <Route path="/" element={<Login />} />
             </Routes>
-          </BrowserRouter>      
+          </BrowserRouter>
         </TriviaContextProvider>
       </AdminContextProvider>
     </>
-  )
+  );
 }
