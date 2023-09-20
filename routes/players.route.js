@@ -159,7 +159,7 @@ PlayersRoute.get("/GetByEmail/:email", async (req, res) => {
     res.status(500).json({ error });
   }
 });
-PlayersRoute.get("/GetByUsename/:username", async (req, res) => {
+PlayersRoute.get("/GetByUsername/:username", async (req, res) => {
   try {
     let { username } = req.params;
     let data = await Player.FindByUsername(username);
