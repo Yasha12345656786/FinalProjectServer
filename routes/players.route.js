@@ -44,7 +44,9 @@ PlayersRoute.put("/updateUsername", async (req, res) => {
   try {
     const player = await Player.FindByEmail(email);
     if (!player) {
-      return res.status(404).json({ message: "Player Wasn't found, Try Again" });
+      return res
+        .status(404)
+        .json({ message: "Player Wasn't found, Try Again" });
     }
     await Player.UpdatePlayersPassword(player._id, username);
     res.status(200).json({ message: "username update" });
@@ -57,7 +59,9 @@ PlayersRoute.post("/updatePassword", async (req, res) => {
   try {
     const player = await Player.FindByEmail(email);
     if (!player) {
-      return res.status(404).json({ message: "Player Wasn't found, Try Again" });
+      return res
+        .status(404)
+        .json({ message: "Player Wasn't found, Try Again" });
     }
     await Player.UpdatePlayersPassword(player._id, password);
     res.status(200).json({ message: "password update" });
@@ -89,8 +93,8 @@ PlayersRoute.post("/AddUser", async (req, res) => {
       email,
       password,
       username,
-      triviaScore=0,
-      memoryScore=0
+      (triviaScore = 0),
+      (memoryScore = 0)
     );
     res.status(201).json(data);
   } catch (error) {
@@ -150,6 +154,15 @@ PlayersRoute.get("/GetByEmail/:email", async (req, res) => {
   try {
     let { email } = req.params;
     let data = await Player.FindByEmail(email);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+});
+PlayersRoute.get("/GetByEmail/:username", async (req, res) => {
+  try {
+    let { username } = req.params;
+    let data = await Player.FindByUsername(username);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error });

@@ -110,6 +110,10 @@ class Player {
     let query = { email: email };
     return await new DB().FindOne("Player", query);
   }
+  static async FindByUsername(username) {
+    let query = { username: username };
+    return await new DB().FindOne("Player", query);
+  }
 }
 
 module.exports = Player;
