@@ -6,8 +6,8 @@ function ForgotUsername() {
 
   const handleResetUsername = async () => {
     try {
-      let res = await fetch("http://localhost:5500/api/player/updateUsername", {
-        method: "POST",
+      let res = await fetch("https://finalprojectserver.onrender.com/api/player/updateUsername", {
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -38,8 +38,8 @@ function ForgotUsername() {
         onChange={(e) => SetEmail(e.target.value)}
       />
       <input
-        type="password"
-        placeholder="New Password"
+        type="text"
+        placeholder="New Username"
         value={password}
         onChange={(e) => SetUsername(e.target.value)}
       />

@@ -7,7 +7,7 @@ function ForgotPassword() {
   const handleResetPassword = async () => {
   
     try{
-    let res = await fetch("http://localhost:5500/api/player/updatePassword", {
+    let res = await fetch("https://finalprojectserver.onrender.com/api/player/updatePassword", {
       method: "POST",
       headers: {
         Accept: "application/json",
