@@ -40,7 +40,7 @@ function ForgotUsername() {
       <input
         type="text"
         placeholder="New Username"
-        value={password}
+        value={username}
         onChange={(e) => SetUsername(e.target.value)}
       />
       <button onClick={handleResetUsername}>Reset Username</button>
