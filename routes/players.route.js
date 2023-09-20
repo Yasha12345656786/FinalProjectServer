@@ -48,7 +48,7 @@ PlayersRoute.put("/updateUsername", async (req, res) => {
         .status(404)
         .json({ message: "Player Wasn't found, Try Again" });
     }
-    await Player.UpdatePlayersPassword(player._id, username);
+    await Player.UpdatePlayersUsername(player._id, username);
     res.status(200).json({ message: "username update" });
   } catch (error) {
     res.status(500).json({ error });
