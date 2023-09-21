@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 export const AdminContext = createContext();
 export default function AdminContextProvider({ children }) {
   const [admin, setAdmin] = useState({});
-  const Login = async (username, password) => {
+  const Login = async (email, password) => {
     try {
       let response = await fetch(
         `${import.meta.env.VITE_SERVER_PATH}/api/admin/login`,
@@ -13,7 +13,7 @@ export default function AdminContextProvider({ children }) {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ email, password }),
         }
       );
       if (response.ok) {
@@ -65,6 +65,17 @@ export default function AdminContextProvider({ children }) {
       }
     } catch (error) {}
   };
+  const GetAdminByEmail =  async (email)=>{
+    try {
+      let response = await fetch(`https://finalprojectserver.onrender.com/api/admin//getAdminByEmail/${email}`);
+      if (response.ok) {
+        let data = await response.json();
+        return data;
+      }else return null;
+    } catch (error) {
+      
+    }
+  }
 
   const value = {
     admin,
@@ -72,6 +83,7 @@ export default function AdminContextProvider({ children }) {
     UpdateUsername,
     UpdatePassword,
     GetAdminById,
+    GetAdminByEmail
   };
 
   return (

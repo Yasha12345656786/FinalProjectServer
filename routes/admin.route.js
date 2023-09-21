@@ -4,9 +4,9 @@ const AdminsRoute = require('express').Router();
 AdminsRoute.post('/login',async (req,res)=>{
     
     try {
-         let {username,password} = req.body;
+         let {email,password} = req.body;
        
-         let admin =  await Admin.Login(username,password);
+         let admin =  await Admin.Login(email,password);
          console.log(admin);
          if(!admin){ 
            res.status(401).json({msg:"BAD login :( "});
@@ -50,6 +50,16 @@ AdminsRoute.get('/getAdminById/:id',async(req,res)=>{
          
   }
 });
+AdminsRoute.get('/getAdminByEmail/:email',async(req,res)=>{
+       try {
+              let {email} = req.params;
+              let data = await Admin.GetAdminByEmail(email);
+              res.status(200).json(data);
+       } catch (error) {
+              res.status(500).json({error});
+              
+       }
+     });
 AdminsRoute.post('/AddPoints',async(req,res)=>{
   try {
          let {id,type,score}=req.body;

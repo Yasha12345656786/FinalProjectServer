@@ -3,7 +3,7 @@ import { AdminContext } from "../Context/AdminContext";
 import { redirect } from "react-router-dom";
 
 export default function Login() {
-  const [username, SetUsername] = useState('');
+  const [email, SetEmail] = useState('');
   const [password, SetPassword] = useState('');
 
 
@@ -15,9 +15,9 @@ export default function Login() {
     
     }
   
-    let admin = { username, password };
+    let admin = { email, password };
     console.log(admin);
-    let res = await fetch(`http://localhost:5500/api/admin/login`, {
+    let res = await fetch(`https://finalprojectserver.onrender.com/api/admin/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -39,10 +39,10 @@ export default function Login() {
       <h1>Login</h1>
       <form onSubmit={Submit}>
         <input
-          type="text"
-          placeholder="username"
+          type="email"
+          placeholder="email"
           required
-          onChange={(event) => SetUsername(event.target.value)}
+          onChange={(event) => SetEmail(event.target.value)}
         />
         <input
           type="password"

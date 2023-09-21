@@ -1,12 +1,12 @@
 const DB = require('../utils/db');
 class Admin{
-    username;
     password;
+    email;
     triviaScore;
     memoryScore;
     
-    constructor(username, password,triviaScore, memoryScore){
-        this.username = username;
+    constructor(email, password,triviaScore, memoryScore){
+        this.email = email;
         this.password = password;
         this.triviaScore = triviaScore;
         this.memoryScore = memoryScore;
@@ -14,6 +14,10 @@ class Admin{
     }
     static async GetAdminById(id){
         return await new DB().FindOneById('Admin',id);
+    }
+    static async GetAdminByEmail(email){
+        let query = {email:email};
+        return await new DB().FindOneById('Admin',query);
     }
 
     static async UpdateAdminsUsername(id, username){
@@ -28,8 +32,8 @@ class Admin{
         }
         return await new DB().UpdateById('Admin', id, doc);
     }
-    static async Login(username, password){
-        let query = {username:username}
+    static async Login(email, password){
+        let query = {email:email}
         console.log(query);
         let admin = await new DB().FindOne("Admin",query);
      
@@ -37,7 +41,7 @@ class Admin{
             console.log("admin",admin)
            return null;}
            this._id = admin._id;
-           this.username = admin.username;  
+           this.email = admin.email;  
         return {...this};
        }
     //    static async AddNewAdmin(password,username,triviaScore,memoryScore){
