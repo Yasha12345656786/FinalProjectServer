@@ -6,9 +6,9 @@ export default function UserInfo() {
     
   return (
     <>
-    <h1>Hello {admin.email}</h1>
+    <h1> Hello {admin.email}</h1>
 
-    <p>Email:{admin.password}</p>
+    <p> password:{admin.password}</p>
     </>
   )
 }
