@@ -8,6 +8,7 @@ import ForgotUsername from "./pages/ForgotUsername";
 import TriviaContextProvider from "./Context/TriviaGameContext";
 import AdminContextProvider from "./Context/AdminContext";
 import BeeInfoPage from "./pages/BeeInfoPage";
+import MemoryGameLeaderBoard from "./pages/MemoryGameLeaderBoard";
 export default function App() {
   return (
     <>
@@ -27,6 +28,7 @@ export default function App() {
                 element={<ForgotUsername />}
               />
               <Route path="/" element={<Login />} />
+              <Route path="/MemoryGameLeaderBoard" element = {<MemoryGameLeaderBoard/>}/>
             </Routes>
           </BrowserRouter>
         </TriviaContextProvider>

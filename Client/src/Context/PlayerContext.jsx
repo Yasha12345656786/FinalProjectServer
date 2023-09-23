@@ -5,7 +5,7 @@ export const PlayerContext = createContext();
 
 export default function PlayerContextProvider({children}) {
     const [player, setPlayer] = useState({});
-    const [allPlayers, setAllPlayers] = useState([]);
+    const [allplayers, setAllPlayers] = useState([]);
 
 
     const GetAll = async () => {
@@ -16,7 +16,7 @@ export default function PlayerContextProvider({children}) {
           });
           if (response.ok) {
             let data = await response.json();
-      
+         
             setAllPlayers(data);
           }
         } catch (error) {}
@@ -24,9 +24,10 @@ export default function PlayerContextProvider({children}) {
 
       const value = {
         player,
-        allPlayers,
+        allplayers,
         GetAll
       }
+    
   return (
     <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
   );
