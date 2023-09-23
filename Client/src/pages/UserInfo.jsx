@@ -1,31 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AdminContext } from '../Context/AdminContext'
-
+import React, { useContext, useEffect, useState } from "react";
+import { AdminContext } from "../Context/AdminContext";
+import { Link, useNavigate } from "react-router-dom";
 export default function UserInfo() {
-    const {admin,  GetAdminByEmail} = useContext(AdminContext);
-    console.log(admin);
-  const [user,setUser] = useState({})
-  // const data=localStorage.getItem("userdata")
-  essionStorage.setItem('user',JSON.stringify(user)); 
-navigate('UserInfo');
-    
-    useEffect(()=>{
-   setUser(data)
-     
-    },[])
+  const navigate = useNavigate();
+  const { admin, GetAdminByEmail, Logout } = useContext(AdminContext);
 
-    useEffect(()=>{
-      let user = JSON.parse(sessionStorage.getItem('user'));
-      setUser(user);
-      },[]);
-    console.log(user);
+  const handleLogout = () => {
+    Logout();
+  };
   return (
     <>
-    <div>
-    <h1> Hello {admin.email}</h1>
+      <div>
+        <h1> Hello {admin?.admin?.email}</h1>
 
-    <p> password:{admin.password}</p>
-    </div>
+        <button> <Link to={'/AdminForgotPassword'}>Forgot Password</Link></button>
+
+        <button><Link to={'/MemoryGameMenu'}>Memory Game Menu</Link></button>
+        <button><Link to={'/TriviaGameMenu'}>Memory Game Menu</Link></button>
+
+        <button onClick={handleLogout}>LogOut</button>
+      </div>
     </>
-  )
+  );
 }

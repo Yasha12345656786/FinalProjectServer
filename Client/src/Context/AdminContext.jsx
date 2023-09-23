@@ -4,9 +4,11 @@ export const AdminContext = createContext();
 
 
 export default function AdminContextProvider({ children }) {
-  const navigate=useNavigate;
+  const navigation=useNavigate();
   const [admin, setAdmin] = useState([]);
+
   const Login = async (email, password) => {
+    debugger;
     try {
       let response = await fetch(
         `https://finalprojectserver.onrender.com/api/admin/login`,
@@ -22,7 +24,7 @@ export default function AdminContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
-     
+        navigation("/UserInfo");
         return true;
       }
     } catch (error) {
@@ -30,7 +32,12 @@ export default function AdminContextProvider({ children }) {
       //logService.send(error)
       console.error(error);
     }
+ 
   };
+  const Logout=()=>{
+    setAdmin({})
+    navigation("/");
+  }
   const UpdateUsername = async (username) => {
     try {
       let response = await fetch("/api/admin/updateUsername", {
@@ -87,7 +94,8 @@ export default function AdminContextProvider({ children }) {
     UpdateUsername,
     UpdatePassword,
     GetAdminById,
-    GetAdminByEmail
+    GetAdminByEmail,
+    Logout
   };
 
   return (

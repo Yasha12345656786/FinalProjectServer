@@ -10,13 +10,13 @@ export default function AdminForgotPass() {
 
     // Define the email data (replace with your service and template IDs)
     const emailData = {
-      service_id: "service_u1qhosa",
-      template_id: "template_f0lisp1",
+      service_id: "service_v12ke1m",
+      template_id: "template_s7wib3t",
       user_id: EMAILJS_PUBLIC_KEY, // User ID can be the same as your public key
       template_params: {
         to_email: recipientEmail, // Replace with the recipient's email address
         subject: "Click The Link Below To Reset Your Password:",
-        message: "https://finalprojectserver.onrender.com/PlayerForgotPassword",
+        message: "https://finalprojectserver.onrender.com/AdminResetPassword",
       },
     };
     // Send the email
@@ -39,7 +39,7 @@ export default function AdminForgotPass() {
     <div>
       <h2>AdminForgotPassword</h2>
       <p>
-        Enter Your Email Address To Reecieve An Email To Reset Your Password
+        Enter Your Email Address To Reset Your Password
       </p>
       <input
         placeholder="Your Email Address"

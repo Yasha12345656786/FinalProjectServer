@@ -6,42 +6,59 @@ import UserInfo from "./UserInfo";
 export default function Login() {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
-  const navigate=useNavigate;
+  const navigation = useNavigate;
 
-  async function Submit(event) {
-    event.preventDefault();
-
-    let admin = { email, password };
-    console.log(admin);
-    let res = await fetch(
-      `https://finalprojectserver.onrender.com/api/admin/login`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(admin),
+  const { admin, Login } = useContext(AdminContext);
+  async function Submit(e) {
+    e.preventDefault();
+  
+    try {
+      let res = await Login(email, password);
+      if (res) {
+        Alert.alert("oops", "User ");
+     
+   
+      } else {
+        Alert.alert("oops", "User Does Not Exist :( ");
+      
       }
-    );
+    } catch (error) {
+      console.error(error);
   
-    let data = await res.json();
- 
-    console.log(data);
-    // const isSuccesful = await Login(username, password);
-    // if (isSuccesful) {
-    //   return redirect("/TriviaGameMenu");
-    // }
-
-    // localStorage.setItem('userdata',JSON.stringify(data) )
-
-  
+    }
   }
+
+  // async function Submit(event) {
+  //   event.preventDefault();
+
+  //   let admin = { email, password };
+  //   console.log(admin);
+  //   let res = await fetch(
+  //     `https://finalprojectserver.onrender.com/api/admin/login`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+
+  //       body: JSON.stringify(admin),
+  //     }
+  //   );
+  //     if(res){
+  //       navigate('/UserInfo')
+  //     }
+  //   let data = await res.json();
+
+  //   console.log(data);
+
+  //   sessionStorage.setItem('userdata',JSON.stringify(data) )
+
+  // }
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={Submit} onClick={navigate(UserInfo)}>
+      <form onSubmit={Submit}>
         <input
           type="email"
           placeholder="email"
@@ -54,7 +71,7 @@ export default function Login() {
           required
           onChange={(event) => SetPassword(event.target.value)}
         />
-        <button type="submit" >Login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

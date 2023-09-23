@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PlayerContext } from "../Context/PlayerContext";
 
+
 export default function MemoryGameLeaderBoard() {
   const { allPlayers, GetAll } = useContext(PlayerContext);
   const [leaderboardData, setLeaderboardData] = useState([]);
@@ -18,10 +19,11 @@ export default function MemoryGameLeaderBoard() {
 
   return (
     <>
+           <h1>Memory Game Leaderboard</h1>
       <div className="leaderboard-container">
-        {leaderboardData.map((data) => (
+        {leaderboardData.map((data,index) => (
           <div  className="leaderboard-item" key={index}>
-          <span className="username">{index}. {data.username}</span>
+          <span className="username">{index+1}.{data.username}</span>
             <span  className="memory-score">{data.memoryScore}</span>
           </div>
         ))}
