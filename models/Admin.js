@@ -17,12 +17,12 @@ class Admin{
     }
     static async GetAdminByEmail(email){
         let query = {email:email};
-        return await new DB().FindOneById('Admin',query);
+        return await new DB().FindOne('Admin',query);
     }
 
-    static async UpdateAdminsUsername(id, username){
+    static async UpdateAdminsEmail(id, email){
         let doc = {
-            username:username
+            email:email
         }
         return await new DB().UpdateById('Admin', id, doc);
     }

@@ -1,43 +1,47 @@
 import React, { useContext, useState } from "react";
 import { AdminContext } from "../Context/AdminContext";
 import { redirect } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import UserInfo from "./UserInfo";
 export default function Login() {
-  const [email, SetEmail] = useState('');
-  const [password, SetPassword] = useState('');
-
+  const [email, SetEmail] = useState("");
+  const [password, SetPassword] = useState("");
+  const navigate=useNavigate;
 
   async function Submit(event) {
-    event.preventDefault()
-   
+    event.preventDefault();
 
-    const a={
-    
-    }
-  
     let admin = { email, password };
     console.log(admin);
-    let res = await fetch(`https://finalprojectserver.onrender.com/api/admin/login`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      
-      body: JSON.stringify(admin),
-    });
+    let res = await fetch(
+      `https://finalprojectserver.onrender.com/api/admin/login`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
 
+        body: JSON.stringify(admin),
+      }
+    );
+  
     let data = await res.json();
+ 
     console.log(data);
     // const isSuccesful = await Login(username, password);
     // if (isSuccesful) {
     //   return redirect("/TriviaGameMenu");
     // }
+
+    // localStorage.setItem('userdata',JSON.stringify(data) )
+
+  
   }
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={Submit}>
+      <form onSubmit={Submit} onClick={navigate(UserInfo)}>
         <input
           type="email"
           placeholder="email"
@@ -50,7 +54,7 @@ export default function Login() {
           required
           onChange={(event) => SetPassword(event.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" >Login</button>
       </form>
     </div>
   );

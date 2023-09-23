@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PlayerContext } from "../Context/PlayerContext";
 
-export default function MemoryGameLeaderBoard() {
+
+export default function TriviaGameLeaderBoard() {
   const { allPlayers, GetAll } = useContext(PlayerContext);
   const [leaderboardData, setLeaderboardData] = useState([]);
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function MemoryGameLeaderBoard() {
   useEffect(() => {
     const sortedData = allPlayers
       .slice()
-      .sort((a, b) => b.memoryScore - a.memoryScore);
+      .sort((a, b) => b.triviaScore - a.triviaScore);
     console.log(sortedData);
     setLeaderboardData(sortedData);
   }, [allPlayers]);
@@ -19,10 +20,10 @@ export default function MemoryGameLeaderBoard() {
   return (
     <>
       <div className="leaderboard-container">
-        {leaderboardData.map((data) => (
+        {leaderboardData.map((data, index) => (
           <div  className="leaderboard-item" key={index}>
-          <span className="username">{index}. {data.username}</span>
-            <span  className="memory-score">{data.memoryScore}</span>
+            <span className="username">{index}. {data.username}</span>
+            <span  className="trivia-score">{data.triviaScore}</span>
           </div>
         ))}
       </div>

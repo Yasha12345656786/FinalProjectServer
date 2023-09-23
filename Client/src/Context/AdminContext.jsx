@@ -1,12 +1,15 @@
 import { createContext, useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 export const AdminContext = createContext();
+
+
 export default function AdminContextProvider({ children }) {
-  const [admin, setAdmin] = useState({});
+  const navigate=useNavigate;
+  const [admin, setAdmin] = useState([]);
   const Login = async (email, password) => {
     try {
       let response = await fetch(
-        `${import.meta.env.VITE_SERVER_PATH}/api/admin/login`,
+        `https://finalprojectserver.onrender.com/api/admin/login`,
         {
           method: "POST",
           headers: {
@@ -19,6 +22,7 @@ export default function AdminContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
+     
         return true;
       }
     } catch (error) {
@@ -65,17 +69,17 @@ export default function AdminContextProvider({ children }) {
       }
     } catch (error) {}
   };
-  const GetAdminByEmail =  async (email)=>{
+  const GetAdminByEmail = async (email) => {
     try {
-      let response = await fetch(`https://finalprojectserver.onrender.com/api/admin//getAdminByEmail/${email}`);
+      let response = await fetch(
+        `https://finalprojectserver.onrender.com/api/admin//getAdminByEmail/${email}`
+      );
       if (response.ok) {
         let data = await response.json();
         return data;
-      }else return null;
-    } catch (error) {
-      
-    }
-  }
+      } else return null;
+    } catch (error) {}
+  };
 
   const value = {
     admin,

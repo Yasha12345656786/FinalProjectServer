@@ -5,7 +5,7 @@ export const PlayerContext = createContext();
 
 export default function PlayerContextProvider({children}) {
     const [player, setPlayer] = useState({});
-    const [allplayers, setAllPlayers] = useState([]);
+    const [allPlayers, setAllPlayers] = useState([]);
 
 
     const GetAll = async () => {
@@ -24,7 +24,7 @@ export default function PlayerContextProvider({children}) {
 
       const value = {
         player,
-        allplayers,
+        allPlayers,
         GetAll
       }
     
