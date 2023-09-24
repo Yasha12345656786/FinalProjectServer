@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
 import TriviaGameMenu from "./components/triviaGameMenu";
-import TriviaGame from './pages/TriviaGame';
+import TriviaGame from "./pages/TriviaGame";
 import ForgotPassword from "./pages/ForgotPassword";
 import ForgotUsername from "./pages/ForgotUsername";
 import TriviaContextProvider from "./Context/TriviaGameContext";
@@ -23,7 +23,7 @@ export default function App() {
             <Routes>
               <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
-       
+
               <Route
                 path="/PlayerForgotPassword"
                 element={<ForgotPassword />}
@@ -33,25 +33,15 @@ export default function App() {
                 element={<ForgotUsername />}
               />
               <Route path="/" element={<Login />} />
+              <Route path="/MemoryGameMenu" element={<MemoryGameMenu />} />
               <Route
-                path="/MemoryGameMenu"
-                element={<MemoryGameMenu />}
-              />
-              <Route
-                path="/TriviaGame"
-                element={<TriviaGame/>}
-              />
-     
-              <Route
-                path="/TriviaGameMenu"
-                element={<TriviaGameMenu />}
-              />
-                   <Route
-                path="/BeeInfoPage"
-                element={<BeeInfoPage />}
+                path="/TriviaGameMenu/TriviaGame"
+                element={<TriviaGame />}
               />
 
-              
+              <Route path="/TriviaGameMenu" element={<TriviaGameMenu />} />
+              <Route path="/BeeInfoPage" element={<BeeInfoPage />} />
+
               <Route
                 path="/MemoryGameLeaderBoard"
                 element={<MemoryGameLeaderBoard />}
@@ -60,7 +50,7 @@ export default function App() {
                 path="/TriviaGameLeaderBoard"
                 element={<TriviaGameLeaderBoard />}
               />
-                <Route
+              <Route
                 path="/AdminForgotPassword"
                 element={<AdminForgotPass />}
               />
