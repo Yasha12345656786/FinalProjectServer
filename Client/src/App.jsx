@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
-import TriviaGameMenu from "./components/triviaGameMenu";
+import TriviaGameMenu from "./pages/TriviaGameMenu";
 import BeeQuestionTrivia from "./pages/BeeQuestionTrivia.jsx";
 import ForgotPassword from "./pages/ForgotPassword";
 import ForgotUsername from "./pages/ForgotUsername";
@@ -13,7 +13,7 @@ import TriviaGameLeaderBoard from "./pages/TriviaGameLeaderBoard";
 import PlayerContext from "./Context/PlayerContext";
 import UserInfo from "./pages/UserInfo";
 import AdminForgotPass from "./pages/AdminForgotPass";
-import MemoryGameMenu from "./components/MemoryGameMenu";
+import MemoryGameMenu from "./pages/MemoryGameMenu";
 export default function App() {
   return (
     <>
