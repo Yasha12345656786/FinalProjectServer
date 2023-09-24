@@ -16,11 +16,17 @@ export default function TriviaContextProvider({ children }) {
       }
     } catch (error) {}
   };
+
   const GetQuestion = async () => {
-    debugger;
+   
     try {
       await fetch("/api/triviaGame/getAllQuestions").then((response) => {
-        return setQuestion(response);
+        if(currentQuestion<response.length-1){
+        return setQuestion(response+1);
+ 
+        }else {
+          setCurrentQuestion(0)
+        }
       });
     } catch (error) {
       console.error(error);

@@ -3,46 +3,45 @@ import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 
 export default function BeeQuestionTrivia() {
-//   const { currentQuestion, UpdateScore, question, GetQuestion } = useContext(TriviaContext);
-//   const { admin } = useContext(AdminContext);
-  
-  
-//   const AnswerPressed = (answer) => {
-//     if (!answer.correct) {
-//       UpdateScore(admin._id, 0);
-//     } else {
-//       UpdateScore(admin._id, answer.points);
-//     }
-//   };
-//   console.log(currentQuestion);
-//   useEffect(() => {
-//     GetQuestion();
-// }, []);
-// console.log("sadds",question);
-  // function renderContent() {
-  //   return (
-  //     <>
-  //       {" "}
-  //       <h3>{currentQuestion?.lvl}</h3>
-  //       <h3>{admin.triviaScore}</h3>
-  //       <h1>{currentQuestion?.q}</h1>
-  //       <div>
-  //         {currentQuestion?.Answers?.map((answer, index) => {
-  //           console.log(answer);
-  //           return (
-  //             <button key={index} onProgress={() => AnswerPressed(answer)}>
-  //               <h5>{answer.value}</h5>
-  //             </button>
-  //           );
-  //         })}
-  //       </div>
-  //     </>
-  //   );
-  // }
+  const { currentQuestion, UpdateScore, question, GetQuestion } =
+    useContext(TriviaContext);
+  const { admin } = useContext(AdminContext);
+
+  const handleAnswerClick = (selecteAnwer) => {
+    //answer logic
+    GetQuestion();
+  };
+
+  console.log("asdasd", question[0]);
+  debugger;
+  //Render the question
+
+  const renderQuestion = () => {
+    return (
+      <div>
+        <h1> Trivia</h1>
+        <p>{question[currentQuestion]?.q}</p>
+        <p>
+          Question {currentQuestion + 1}/{question.length}
+        </p>
+
+        <div> {renderOptions()}</div>
+        <p> </p>
+      </div>
+    );
+  };
+  const renderOptions = () => {
+    question[currentQuestion]?.Answers?.map((options, index) => (
+      <button key={index} onClick={() => handleAnswerClick(options)}>
+        {options}
+      </button>
+    ));
+  };
 
   return (
     <>
-      <div>TriviaGame</div>
+      {renderQuestion()}
+
       {/* {!currentQuestion.lvl ? <div>loading</div> : renderContent()} */}
     </>
   );

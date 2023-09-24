@@ -6,7 +6,7 @@ export default function TriviaGameMenu() {
     <>
       <ul>
         <li>
-          <Link to="/TriviaGameMenu/TriviaGame">Trivia Game</Link>
+          <Link to="/TriviaGameMenu/BeeQuestionTrivia">Trivia Game</Link>
         </li>
         <li>
           <Link to="/TriviaGameLeaderoard">Leaderboard</Link>

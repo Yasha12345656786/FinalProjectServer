@@ -35,7 +35,7 @@ export default function App() {
               <Route path="/" element={<Login />} />
               <Route path="/MemoryGameMenu" element={<MemoryGameMenu />} />
               <Route
-                path="/TriviaGameMenu/TriviaGame"
+                path="/TriviaGameMenu/BeeQuestionTrivia"
                 element={<BeeQuestionTrivia />}
               />
 
