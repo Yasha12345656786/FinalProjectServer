@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 
-export default function TriviaGame() {
+export default function BeeQuestionTrivia() {
 //   const { currentQuestion, UpdateScore, question, GetQuestion } = useContext(TriviaContext);
 //   const { admin } = useContext(AdminContext);
   
