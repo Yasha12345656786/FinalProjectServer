@@ -1,9 +1,10 @@
 const triviaGame =  require('../models/triviaGame');
 const TriviaRoute = require('express').Router();
 
-TriviaRoute.get('/',async(req,res)=>{
+TriviaRoute.get('/getAllQuestions',async(req,res)=>{
     try {
         let data = await triviaGame.GetAllLevels();
+        console.log(data);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({error});
@@ -44,7 +45,7 @@ TriviaRoute.get('/GetNextLevelBylvl/:lvl',async(req,res)=>{
         res.status(500).json({error});
         
     }
-})
+});
 module.exports=TriviaRoute;
 
  

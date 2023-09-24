@@ -16,7 +16,8 @@ export default function UserInfo() {
         <button> <Link to={'/AdminForgotPassword'}>Forgot Password</Link></button>
 
         <button><Link to={'/MemoryGameMenu'}>Memory Game Menu</Link></button>
-        <button><Link to={'/TriviaGameMenu'}>Memory Game Menu</Link></button>
+        <button><Link to={'/TriviaGameMenu'}>Trivia Game Menu</Link></button>
+        <button><Link to={'/BeeInfoPage'}>Bee Info Page</Link></button>
 
         <button onClick={handleLogout}>LogOut</button>
       </div>

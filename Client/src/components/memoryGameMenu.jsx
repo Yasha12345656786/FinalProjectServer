@@ -9,7 +9,7 @@ export default function MemoryGameMenu() {
             <Link to="/MemoryGame">Memory Game</Link>
         </li>
         <li>
-            <Link to="/MemoryLeaderBoard">Leaderboard</Link>
+            <Link to="/MemoryGameLeaderBoard">Leaderboard</Link>
         </li>
       </ul>
     </>
