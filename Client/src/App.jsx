@@ -23,7 +23,7 @@ export default function App() {
             <Routes>
               <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
-              {/* <Route path="/TriviaGame" element={<TriviaGame/>} /> */}
+       
               <Route
                 path="/PlayerForgotPassword"
                 element={<ForgotPassword />}
@@ -39,7 +39,7 @@ export default function App() {
               />
               <Route
                 path="/TriviaGame"
-                element={<TriviaGame />}
+                element={<TriviaGame/>}
               />
      
               <Route
