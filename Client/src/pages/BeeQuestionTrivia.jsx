@@ -9,11 +9,13 @@ export default function BeeQuestionTrivia() {
 
   const handleAnswerClick = (selecteAnwer) => {
     //answer logic
-    GetQuestion();
-  };
 
-  console.log("asdasd", question[0]);
-  debugger;
+  };
+  useEffect(() => {
+    GetQuestion();
+  }, []);
+  console.log("asdasd", question);
+
   //Render the question
 
   const renderQuestion = () => {
@@ -40,7 +42,7 @@ export default function BeeQuestionTrivia() {
 
   return (
     <>
-      {renderQuestion()}
+      {/* {renderQuestion()} */}
 
       {/* {!currentQuestion.lvl ? <div>loading</div> : renderContent()} */}
     </>

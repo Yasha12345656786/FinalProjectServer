@@ -3,7 +3,7 @@ export const TriviaContext = createContext();
 export default function TriviaContextProvider({ children }) {
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [currentLevel, setCurrentLevel] = useState(0);
-  const [question, setQuestion] = useState([]);
+  const [question, setQuestion] = useState(null);
 
   const GetNextQuestion = async () => {
     try {
@@ -11,29 +11,31 @@ export default function TriviaContextProvider({ children }) {
         `/api/triviaGame/GetNextLevelBylvl/${currentLevel}`
       );
       if (response.ok) {
-        let data = await response.json();
-        setCurrentQuestion(data);
+        let data = await response.json().setCurrentQuestion(data);
       }
     } catch (error) {}
   };
 
   const GetQuestion = async () => {
-   
+    debugger
     try {
-      await fetch("/api/triviaGame/getAllQuestions").then((response) => {
-        if(currentQuestion<response.length-1){
-        return setQuestion(response+1);
- 
-        }else {
-          setCurrentQuestion(0)
+      const response = await fetch("/api/triviaGame/");
+      if (response.ok) {
+        const text = await response.text();
+        try {
+          const data = JSON.parse(text);
+          setQuestion(data); // Update the state with the fetched questions
+        } catch (jsonError) {
+          console.error("Error parsing JSON:", jsonError);
         }
-      });
+      } else {
+        console.error("Failed to fetch questions. Status code:", response.status);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching questions:", error);
     }
+   
   };
-  console.log(question);
-
   const UpdateScore = async (id, score) => {
     try {
       let response = await fetch("/api/admin/AddPoints", {
