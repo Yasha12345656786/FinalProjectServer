@@ -4,30 +4,40 @@ export default function TriviaContextProvider({ children }) {
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [currentLevel, setCurrentLevel] = useState(0);
   const [question, setQuestion] = useState(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const GetNextQuestion = async () => {
+  // const GetNextQuestion = async () => {
+  //   try {
+  //     let response = await fetch(
+  //       `https://finalprojectserver.onrender.com/api/triviaGame/GetNextLevelBylvl/${currentLevel}`
+  //     );
+  //     if (response.ok) {
+  //       let data = await response.json()
+  //       setCurrentQuestion(data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // };
+  const GetNextQuestion = () => {
+    if (currentQuestionIndex < question.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      // Handle game completion logic here
+      alert('Game Over!');
+    }
+  };
+  const GetQuestion = async () => {
+  
     try {
-      let response = await fetch(
-        `/api/triviaGame/GetNextLevelBylvl/${currentLevel}`
+      const response = await fetch("https://finalprojectserver.onrender.com/api/triviaGame/",{
+        method: "GET"
+      }
+  
       );
       if (response.ok) {
-        let data = await response.json().setCurrentQuestion(data);
-      }
-    } catch (error) {}
-  };
-
-  const GetQuestion = async () => {
-    debugger
-    try {
-      const response = await fetch("/api/triviaGame/");
-      if (response.ok) {
-        const text = await response.text();
-        try {
-          const data = JSON.parse(text);
-          setQuestion(data); // Update the state with the fetched questions
-        } catch (jsonError) {
-          console.error("Error parsing JSON:", jsonError);
-        }
+        const text = await response.json()
+        setQuestion(text)
       } else {
         console.error("Failed to fetch questions. Status code:", response.status);
       }
@@ -50,17 +60,19 @@ export default function TriviaContextProvider({ children }) {
         }),
       });
       if (response.ok) {
-        setCurrentLevel((prev) => +1);
+        setCurrentLevel((prev) => prev+1);
       }
     } catch (error) {}
   };
   useEffect(() => {
-    GetNextQuestion();
-    //GetNextAnswers();
-  }, [currentLevel]);
+    GetQuestion();
+
+  }, []);
 
   const value = {
+    GetNextQuestion,
     currentQuestion,
+    currentQuestionIndex,
     question,
     GetQuestion,
     UpdateScore,

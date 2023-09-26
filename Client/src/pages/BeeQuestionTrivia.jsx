@@ -3,48 +3,67 @@ import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 
 export default function BeeQuestionTrivia() {
-  const { currentQuestion, UpdateScore, question, GetQuestion } =
-    useContext(TriviaContext);
-  const { admin } = useContext(AdminContext);
+  const { question, currentQuestionIndex, GetNextQuestion } = useContext(
+    TriviaContext
+  )
 
-  const handleAnswerClick = (selecteAnwer) => {
-    //answer logic
+  const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
+const currentQuestion=question[currentQuestionIndex]
 
+  const handleOptionSelect = (selecteAnwer) => {
+    setSelectdOptionIndex(selecteAnwer);
   };
-  useEffect(() => {
-    GetQuestion();
-  }, []);
-  console.log("asdasd", question);
+
+
+  const handleNextClick = () => {
+    if(!currentQuestion){
+      return
+    }
+    const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
+
+    // if (selectedOptionIndex !== null && selectedOptionIndex === correctAnswer.index) {
+    //   // Handle scoring logic here
+    // }else{
+    //   console.error('eroor')
+    // }
+
+    GetNextQuestion();
+    setSelectdOptionIndex(null);
+  }
 
   //Render the question
 
-  const renderQuestion = () => {
-    return (
-      <div>
-        <h1> Trivia</h1>
-        <p>{question[currentQuestion]?.q}</p>
-        <p>
-          Question {currentQuestion + 1}/{question.length}
-        </p>
-
-        <div> {renderOptions()}</div>
-        <p> </p>
-      </div>
-    );
-  };
-  const renderOptions = () => {
-    question[currentQuestion]?.Answers?.map((options, index) => (
-      <button key={index} onClick={() => handleAnswerClick(options)}>
-        {options}
-      </button>
-    ));
-  };
-
   return (
     <>
-      {/* {renderQuestion()} */}
+      <h1>Trivia game</h1>
+      {currentQuestion ? (
+        <div>
+          <p>{currentQuestion.q}</p>
+          <ul>
+            {currentQuestion.Answers?.map((answer, index) => (
+              <button
+                key={index}
+                onClick={() => handleOptionSelect(index)}
+                className={
+                  selectedOptionIndex === index
+                    ? "selectd-option"
+                    : selectedOptionIndex !== null && answer.correct
+                    ? "current"
+                    : ""
+                }
+              >
+                {answer.value}
+              </button>
+            ))}
+          </ul>
+          <button onClick={handleNextClick}>Next</button>
+        </div>
+      ) : (
+        <p>Loading.....</p>
+      )}
+      {/* {renderOptions()}
 
-      {/* {!currentQuestion.lvl ? <div>loading</div> : renderContent()} */}
+      {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
     </>
   );
 }
