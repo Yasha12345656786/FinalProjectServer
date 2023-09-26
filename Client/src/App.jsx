@@ -14,12 +14,14 @@ import PlayerContext from "./Context/PlayerContext";
 import UserInfo from "./pages/UserInfo";
 import AdminForgotPass from "./pages/AdminForgotPass";
 import MemoryGameMenu from "./pages/MemoryGameMenu";
+import logo from "./assets/logo.png";
 export default function App() {
   return (
     <>
       <AdminContextProvider>
         <TriviaContextProvider>
           <PlayerContext>
+            <img src={logo} style={{ height: 100, width: 100 }} />{" "}
             <Routes>
               <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
