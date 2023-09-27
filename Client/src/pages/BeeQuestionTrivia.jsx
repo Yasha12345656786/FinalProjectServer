@@ -3,7 +3,7 @@ import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 
 export default function BeeQuestionTrivia() {
-  const { question, currentQuestionIndex, GetNextQuestion } = useContext(
+  const { question, currentQuestionIndex, GetNextQuestion ,UpdateScore} = useContext(
     TriviaContext
   )
 
@@ -16,16 +16,17 @@ const currentQuestion=question[currentQuestionIndex]
 
 
   const handleNextClick = () => {
+  
     if(!currentQuestion){
       return
     }
-    const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
-
-    // if (selectedOptionIndex !== null && selectedOptionIndex === correctAnswer.index) {
-    //   // Handle scoring logic here
-    // }else{
-    //   console.error('eroor')
-    // }
+    // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
+    const correctAnswer = currentQuestion.Answers[selectedOptionIndex]
+    if (correctAnswer  && correctAnswer.correct) {
+       UpdateScore(currentQuestion._id,currentQuestion.points)
+     }else{
+      console.error('eroor')
+     }
 
     GetNextQuestion();
     setSelectdOptionIndex(null);
