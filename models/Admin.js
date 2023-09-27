@@ -61,8 +61,8 @@ class Admin {
     if (type == 1) {
       admin.triviaScore += score;
     }
-    await new DB().UpdateById("Admin", id, player);
-    return player;
+    await new DB().UpdateById("Admin", id, admin);
+    return admin;
   }
 }
 module.exports = Admin;
