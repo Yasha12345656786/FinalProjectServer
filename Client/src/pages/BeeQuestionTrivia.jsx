@@ -1,22 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
-import { compare } from "bcrypt";
 
 export default function BeeQuestionTrivia() {
   const { question, currentQuestionIndex, GetNextQuestion ,UpdateScore} = useContext(
     TriviaContext
   )
-  const [id,setId]=useState('');
+  const [id,setId]=useState([]);
+  console.log(question);
 const {admin,GetAdminById}=useContext(AdminContext);
+const [points,setPoint]=useState(0)
+const adminID=localStorage.getItem('admin')
 
 useEffect(()=>{
-
+  setId(JSON.parse(adminID))
 },[])
-
+  console.log();
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
 const currentQuestion=question[currentQuestionIndex]
-
+console.log(currentQuestion.points);
   const handleOptionSelect = (selecteAnwer) => {
     setSelectdOptionIndex(selecteAnwer);
   };
@@ -30,7 +32,8 @@ const currentQuestion=question[currentQuestionIndex]
     // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
     const correctAnswer = currentQuestion.Answers[selectedOptionIndex]
     if (correctAnswer  && correctAnswer.correct) {
-       UpdateScore(currentQuestion._id,currentQuestion.points)
+       UpdateScore(id._id,currentQuestion.points)
+       setPoint(points+currentQuestion.points)
      }else{
       console.error('eroor')
      }
@@ -44,6 +47,7 @@ const currentQuestion=question[currentQuestionIndex]
   return (
     <>
       <h1>Trivia game</h1>
+      <p>Point:{points}</p>
       {currentQuestion ? (
         <div>
           <p>{currentQuestion.q}</p>
@@ -51,7 +55,7 @@ const currentQuestion=question[currentQuestionIndex]
             {currentQuestion.Answers?.map((answer, index) => (
               <button
                 key={index}
-                onClick={() => handleOptionSelect(index)}
+                onClick={() =>{ handleOptionSelect(index)}}
                 className={
                   selectedOptionIndex === index
                     ? "selectd-option"

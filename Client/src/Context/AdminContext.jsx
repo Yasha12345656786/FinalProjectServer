@@ -8,7 +8,7 @@ export default function AdminContextProvider({ children }) {
   const [admin, setAdmin] = useState([]);
 
   const Login = async (email, password) => {
-    debugger;
+  
     try {
       let response = await fetch(
         `https://finalprojectserver.onrender.com/api/admin/login`,
@@ -24,7 +24,7 @@ export default function AdminContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
-
+        localStorage.setItem("admin",JSON.stringify(data.admin))
         navigation("/UserInfo");
         return true;
       }

@@ -47,19 +47,16 @@ export default function TriviaContextProvider({ children }) {
    
   };
   const UpdateScore = async (id, score) => {
-debugger
+
     try {
       let response = await fetch("https://finalprojectserver.onrender.com/api/admin/AddPoints/", {
         method: "POST",
         headers: {
-          "Context-Type": "application/json",
+          "Content-Type": "application/json",
         },
-        body:{
-          id: id,
-          type: 1,
-          score: score
-         } 
-        ,
+        body: JSON.stringify({ id,type:1, score }),
+     
+       
       });
       if (response.ok) {
         let data = await response.json();
