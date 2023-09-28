@@ -47,7 +47,7 @@ console.log(currentQuestion.points);
   return (
     <>
       <h1>Trivia game</h1>
-      <p>Point:{points}</p>
+      <p>Score:{points}</p>
       {currentQuestion ? (
         <div>
           <p>{currentQuestion.q}</p>
