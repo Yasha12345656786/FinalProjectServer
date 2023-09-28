@@ -16,7 +16,7 @@ export default function Login() {
       let res = await Login(email, password);
       if (res) {
         Alert.alert("oops", "User ");
-     
+        
    
       } else {
         Alert.alert("oops", "User Does Not Exist :( ");

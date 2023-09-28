@@ -54,7 +54,9 @@ class Admin {
   //         return await new DB().Insert('Admin',doc);
   // }
   static async AddPoints(id, type, score) {
+    
     let admin = await new DB().FindOneById("Admin", id);
+    console.log(admin)
     if (type == 0) {
       admin.memoryScore += score;
     }

@@ -24,6 +24,7 @@ export default function AdminContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
+
         navigation("/UserInfo");
         return true;
       }
@@ -66,7 +67,7 @@ export default function AdminContextProvider({ children }) {
   };
   const GetAdminById = async (id) => {
     try {
-      let response = await fetch("/api/admin/getAdminById", {
+      let response = await fetch("https://finalprojectserver.onrender.com/api/admin/getAdminById", {
         method: "GET",
         body: JSON.stringfy({ admin }),
       });

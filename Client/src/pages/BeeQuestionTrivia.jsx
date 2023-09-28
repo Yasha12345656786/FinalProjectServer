@@ -1,11 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
+import { compare } from "bcrypt";
 
 export default function BeeQuestionTrivia() {
   const { question, currentQuestionIndex, GetNextQuestion ,UpdateScore} = useContext(
     TriviaContext
   )
+  const [id,setId]=useState('');
+const {admin,GetAdminById}=useContext(AdminContext);
+
+useEffect(()=>{
+
+},[])
 
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
 const currentQuestion=question[currentQuestionIndex]

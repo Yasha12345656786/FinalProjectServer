@@ -54,13 +54,16 @@ debugger
         headers: {
           "Context-Type": "application/json",
         },
-        body: JSON.stringify({
+        body:{
           id: id,
           type: 1,
-          score: score,
-        }),
+          score: score
+         } 
+        ,
       });
       if (response.ok) {
+        let data = await response.json();
+        console.log(data);
         setCurrentLevel((prev) => prev+1);
       }
     } catch (error) {
