@@ -9,7 +9,7 @@ export default function BeeQuestionTrivia() {
   const [id,setId]=useState([]);
   console.log(question);
 const {admin,GetAdminById}=useContext(AdminContext);
-const [points,setPoint]=useState(0)
+const [points,setPoints]=useState(0)
 const adminID=localStorage.getItem('admin')
 
 useEffect(()=>{
@@ -33,7 +33,7 @@ console.log(currentQuestion.points);
     const correctAnswer = currentQuestion.Answers[selectedOptionIndex]
     if (correctAnswer  && correctAnswer.correct) {
        UpdateScore(id._id,currentQuestion.points)
-       setPoint(points+currentQuestion.points)
+       setPoints(points+currentQuestion.points)
      }else{
       console.error('eroor')
      }
