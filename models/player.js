@@ -63,18 +63,18 @@ class Player {
   static async AddNewPlayer(
     first_name,
     last_name,
+    username,
     email,
     password,
-    username,
     triviaScore,
     memoryScore
   ) {
     let doc = {
       first_name: first_name,
       last_name: last_name,
+      username: username,
       email: email,
       password: password,
-      username: username,
       triviaScore: Number(triviaScore),
       memoryScore: Number(memoryScore),
     };
