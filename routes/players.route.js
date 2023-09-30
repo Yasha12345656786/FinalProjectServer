@@ -86,8 +86,8 @@ PlayersRoute.post("/AddUser", async (req, res) => {
     let { email } = req.body;
     let { password } = req.body;
     
-    // let { triviaScore } = Number(0);
-    // let { memoryScore } = Number(0);
+    let { triviaScore } = Number(0);
+    let { memoryScore } = Number(0);
     let data = await Player.AddNewPlayer(
       first_name,
       last_name,
