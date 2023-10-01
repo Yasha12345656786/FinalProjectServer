@@ -6,7 +6,7 @@ export const AdminContext = createContext();
 export default function AdminContextProvider({ children }) {
   const navigation=useNavigate();
   const [admin, setAdmin] = useState([]);
-
+  const [dataAdmin,setDataAdmin]=useState([])
   const Login = async (email, password) => {
   
     try {
@@ -84,6 +84,7 @@ export default function AdminContextProvider({ children }) {
       );
       if (response.ok) {
         let data = await response.json();
+        setDataAdmin(data)
         return data;
       } else return null;
     } catch (error) {}
@@ -92,6 +93,7 @@ export default function AdminContextProvider({ children }) {
   const value = {
     admin,
     Login,
+    dataAdmin,
     UpdateUsername,
     UpdatePassword,
     GetAdminById,

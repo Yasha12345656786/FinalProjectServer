@@ -6,38 +6,47 @@ export default function BeeQuestionTrivia() {
   const { question, currentQuestionIndex, GetNextQuestion, UpdateScore } =
     useContext(TriviaContext);
   const [id, setId] = useState([]);
-  console.log(question);
   const { admin, GetAdminById } = useContext(AdminContext);
   const [points, setPoints] = useState(0);
+  const [color, setColor] = useState();
   const adminID = localStorage.getItem("admin");
+
+  const currentQuestion = question ? question[currentQuestionIndex] : null;
 
   useEffect(() => {
     setId(JSON.parse(adminID));
   }, []);
-  console.log();
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
-  const currentQuestion = question[currentQuestionIndex];
-  console.log(currentQuestion.points);
-  const handleOptionSelect = (selecteAnwer) => {
-    setSelectdOptionIndex(selecteAnwer);
-    handleNextClick();
-  };
 
-  const handleNextClick = () => {
+  const handleNextClick = (selecteAnwer) => {
+    setSelectdOptionIndex(selecteAnwer);
+
     if (!currentQuestion) {
       return;
     }
+
     // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
-    const correctAnswer = currentQuestion.Answers[selectedOptionIndex];
+    const correctAnswer = currentQuestion.Answers[selecteAnwer];
     if (correctAnswer && correctAnswer.correct) {
+      setColor("green");
+
       UpdateScore(id._id, currentQuestion.points);
       setPoints(points + currentQuestion.points);
     } else {
-      console.error("error");
-    }
+      document
+        .querySelector(`button[data-index]="${correctAnswer}`)
+        .classList.remove("correct");
+      document
+        .querySelector(`button[data-index]="${correctAnswer}`)
+        .classList.add("incorrect");
 
-    GetNextQuestion();
-    setSelectdOptionIndex(null);
+      console.error("error");
+      setColor("red");
+    }
+    setTimeout(() => {
+      GetNextQuestion();
+      setSelectdOptionIndex(null);
+    }, 5000);
   };
 
   //Render the question
@@ -54,13 +63,13 @@ export default function BeeQuestionTrivia() {
               <button
                 key={index}
                 onClick={() => {
-                  handleOptionSelect(index);
+                  handleNextClick(index);
                 }}
                 className={
                   selectedOptionIndex === index
-                    ? "selectd-option"
+                    ? "selected-option"
                     : selectedOptionIndex !== null && answer.correct
-                    ? "current"
+                    ? "correct"
                     : ""
                 }
               >
