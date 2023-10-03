@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function AdminResetPass() {
-  onst[(email, SetEmail)] = useState("");
+  const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
 
   const handleResetPassword = async () => {
@@ -31,7 +31,7 @@ export default function AdminResetPass() {
   };
   return (
     <div>
-      <h2>AdminResetPassword</h2>
+      <h2>Reset Password</h2>
       <input
         type="email"
         placeholder="Email"

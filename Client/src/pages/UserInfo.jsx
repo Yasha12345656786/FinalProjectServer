@@ -17,10 +17,6 @@ export default function UserInfo() {
         <h1> Hello {admin?.admin?.email}</h1>
         <h3>Trivia Score: {dataAdmin?.triviaScore}</h3>
 
-        <button>
-          {" "}
-          <Link to={"/AdminForgotPassword"}>Forgot Password</Link>
-        </button>
 
         <button>
           <Link to={"/MemoryGameMenu"}>Memory Game Menu</Link>

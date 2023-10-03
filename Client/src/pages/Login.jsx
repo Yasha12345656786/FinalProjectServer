@@ -3,6 +3,7 @@ import { AdminContext } from "../Context/AdminContext";
 import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserInfo from "./UserInfo";
+import { Link } from "react-router-dom";
 export default function Login() {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
@@ -66,6 +67,7 @@ export default function Login() {
         />
         <button type="submit">Login</button>
       </form>
+      <button>  <Link to="/AdminForgotPassword">Forgot Pass?</Link> </button>
     </div>
   );
 }
