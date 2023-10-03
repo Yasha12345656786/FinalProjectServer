@@ -46,7 +46,7 @@ export default function BeeQuestionTrivia() {
     setTimeout(() => {
       GetNextQuestion();
       setSelectdOptionIndex(null);
-    }, 5000);
+    }, 3000);
   };
 
   //Render the question
