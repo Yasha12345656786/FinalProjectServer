@@ -15,7 +15,9 @@ import UserInfo from "./pages/UserInfo";
 import AdminForgotPass from "./pages/AdminForgotPass";
 import MemoryGameMenu from "./pages/MemoryGameMenu";
 import logo from "./assets/logo.png";
+import AdminResetPass from "./pages/AdminResetPass";
 export default function App() {
+  const navigate = useNavigate();
   return (
     <>
       <AdminContextProvider>
@@ -56,6 +58,7 @@ export default function App() {
                 path="/AdminForgotPassword"
                 element={<AdminForgotPass />}
               />
+              <Route path="/AdminResetPassword" element={<AdminResetPass />} />
 
               <Route path="/login" element={<Login />} />
               <Route path="/UserInfo" element={<UserInfo />} />

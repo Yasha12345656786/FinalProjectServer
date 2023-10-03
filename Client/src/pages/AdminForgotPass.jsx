@@ -3,8 +3,10 @@ import React, { useCallback, useState } from "react";
 export default function AdminForgotPass() {
   const [recipientEmail, setRecipientEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
-  const EMAILJS_PUBLIC_KEY = "yVLhGWDVAc-Nm6xSY";
+  const EMAILJS_PUBLIC_KEY = "SNMHmWLLZGyZpn0pF";
   const sendEmail = () => {
+    debugger;
+    console.log(recipientEmail)
     // Initialize EmailJS with your public key
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
@@ -38,15 +40,14 @@ export default function AdminForgotPass() {
   return (
     <div>
       <h2>AdminForgotPassword</h2>
-      <p>
-        Enter Your Email Address To Reset Your Password
-      </p>
+      <p>Enter Your Email Address To Reset Your Password</p>
       <input
         placeholder="Your Email Address"
-        value={recipientEmail}
-        onChange={(text) => setRecipientEmail(text)}
+        onChange={(event) => setRecipientEmail(event.target.value)}
       />
-      <button title="Send Email" onClick={sendEmail} disabled={emailSent} />
+      <button title="Send Email" onClick={sendEmail} disabled={emailSent}>
+        Send
+      </button>
       {emailSent && <h4>Email Sent Successfully</h4>}
     </div>
   );

@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
+import { useNavigate } from "react-router-dom";
 
 export default function BeeQuestionTrivia() {
+  const navigate = useNavigate();
   const { question, currentQuestionIndex, GetNextQuestion, UpdateScore } =
     useContext(TriviaContext);
   const [id, setId] = useState([]);
@@ -16,6 +18,9 @@ export default function BeeQuestionTrivia() {
   useEffect(() => {
     setId(JSON.parse(adminID));
   }, []);
+const quitGame = ()=>{
+  navigate("/TriviaGameMenu");
+}
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
 
   const handleNextClick = (selecteAnwer) => {
@@ -85,6 +90,9 @@ export default function BeeQuestionTrivia() {
       {/* {renderOptions()}
 
       {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
+      <button>
+        Quit Game
+      </button>
     </>
   );
 }
