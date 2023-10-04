@@ -10,6 +10,7 @@ export default function UserInfo() {
   };
   useEffect(() => {
     GetAdminByEmail(admin?.admin?.email);
+   
   }, []);
   return (
     <>

@@ -5,11 +5,18 @@ import { useNavigate } from "react-router-dom";
 
 export default function BeeQuestionTrivia() {
   const navigate = useNavigate();
-  const { question, currentQuestionIndex, GetNextQuestion, UpdateScore } =
-    useContext(TriviaContext);
+  const {
+    question,
+    currentQuestionIndex,
+    GetNextQuestion,
+    UpdateScore,
+    setCurrentQuestionIndex,
+    points,
+    setPoints,
+  } = useContext(TriviaContext);
   const [id, setId] = useState([]);
   const { admin, GetAdminById } = useContext(AdminContext);
-  const [points, setPoints] = useState(0);
+
   const [color, setColor] = useState();
   const adminID = localStorage.getItem("admin");
 
@@ -18,9 +25,11 @@ export default function BeeQuestionTrivia() {
   useEffect(() => {
     setId(JSON.parse(adminID));
   }, []);
-const quitGame = ()=>{
-  navigate("/TriviaGameMenu");
-}
+  const quitGame = () => {
+    setCurrentQuestionIndex(0);
+    setPoints(0);
+    navigate("/TriviaGameMenu");
+  };
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
 
   const handleNextClick = (selecteAnwer) => {
@@ -32,10 +41,12 @@ const quitGame = ()=>{
 
     // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
     const correctAnswer = currentQuestion.Answers[selecteAnwer];
+    console.log("dd",correctAnswer);
     if (correctAnswer && correctAnswer.correct) {
       setColor("green");
 
       UpdateScore(id._id, currentQuestion.points);
+
       setPoints(points + currentQuestion.points);
     } else {
       document
@@ -48,10 +59,10 @@ const quitGame = ()=>{
       console.error("error");
       setColor("red");
     }
-    setTimeout(() => {
+
       GetNextQuestion();
       setSelectdOptionIndex(null);
-    }, 3000);
+  
   };
 
   //Render the question
@@ -90,9 +101,8 @@ const quitGame = ()=>{
       {/* {renderOptions()}
 
       {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
-      <button>
-        Quit Game
-      </button>
+      <button onClick={quitGame}>Quit Game</button>
+      <button>Edit</button>
     </>
   );
 }

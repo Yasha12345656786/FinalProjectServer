@@ -7,7 +7,8 @@ export default function TriviaContextProvider({ children }) {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [question, setQuestion] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
+  const [points, setPoints] = useState(0);
+  const [endGame, setEndGame] = useState(false);
   // const GetNextQuestion = async () => {
   //   try {
   //     let response = await fetch(
@@ -26,9 +27,15 @@ export default function TriviaContextProvider({ children }) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       // Handle game completion logic here
-      alert("Game Over! , Your Trivia Score Has Been Updated");
-      navigate("/TriviaGameMenu");
+      setEndGame(true);
       setQuestion(null);
+      if(endGame){
+        alert("Game Over! , Your Trivia Score Has Been Updated");
+
+        navigate("/TriviaGameMenu");
+
+      }
+
     }
   };
   const GetQuestion = async () => {
@@ -53,24 +60,31 @@ export default function TriviaContextProvider({ children }) {
     }
   };
   const UpdateScore = async (id, score) => {
-    try {
-      let response = await fetch(
-        "https://finalprojectserver.onrender.com/api/admin/AddPoints/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id, type: 1, score }),
+console.log(endGame);   
+ if (endGame === true) {
+  debugger
+      try {
+        let response = await fetch(
+          "https://finalprojectserver.onrender.com/api/admin/AddPoints/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id, type: 1, score }),
+          }
+        );
+
+        if (response.ok) {
+          let data = await response.json();
+          console.log(data);
+          setCurrentLevel((prev) => prev + 1);
         }
-      );
-      if (response.ok) {
-        let data = await response.json();
-        console.log(data);
-        setCurrentLevel((prev) => prev + 1);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+    } else {
+      console.log("More Questions Left");
     }
   };
   useEffect(() => {
@@ -82,8 +96,11 @@ export default function TriviaContextProvider({ children }) {
     currentQuestion,
     currentQuestionIndex,
     question,
+    points,
+    setPoints,
     GetQuestion,
     UpdateScore,
+    setCurrentQuestionIndex
   };
 
   return (
