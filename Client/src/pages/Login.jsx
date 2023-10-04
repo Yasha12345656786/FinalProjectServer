@@ -50,24 +50,26 @@ export default function Login() {
 
   // }
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={Submit}>
+    <div  className="containerStyle"> 
+      <h1 className="headingStyle">Login</h1>
+      <form onSubmit={Submit} className="formStyle">
         <input
           type="email"
           placeholder="email"
           required
-          onChange={(event) => SetEmail(event.target.value)}
+          onChange={(event) => SetEmail(event.target.value) }
+          className="inputStyle"
         />
         <input
           type="password"
           placeholder="password"
           required
           onChange={(event) => SetPassword(event.target.value)}
+          className="inputStyle"
         />
-        <button type="submit">Login</button>
+        <button type="submit"  className="submitButtonStyle">Login</button>
       </form>
-      <button>  <Link to="/AdminForgotPassword">Forgot Pass?</Link> </button>
+      <button className="forgotPasswordButtonStyle">  <Link to="/AdminForgotPassword" className="linkStyle">Forgot Pass?</Link> </button>
     </div>
   );
 }

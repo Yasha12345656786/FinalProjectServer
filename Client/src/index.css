@@ -30,3 +30,187 @@
 .incorrect {
   background-color: red;
 }
+.containerStyle {
+  text-align: center;
+  margin: auto;
+  max-width: 300px;
+  padding: 20px;
+}
+
+.headingStyle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.formStyle {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputStyle {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.submitButtonStyle {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.forgotPasswordButtonStyle {
+  margin-top: 10px;
+}
+
+.linkStyle {
+  text-decoration: none;
+  color: #007bff;
+}
+.containerStyle {
+  text-align: center;
+  margin: auto;
+  max-width: 300px;
+  padding: 20px;
+}
+
+.headingStyle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.subHeadingStyle {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.dashboardButtonStyle {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dashboardButtonStyle a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.dashboardButtonStyle:hover {
+  background-color: #0056b3; /* Slightly darker shade on hover */
+}
+
+.logoutButtonStyle {
+  background-color: #d9534f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.logoutButtonStyle:hover {
+  background-color: #c9302c; /* Slightly darker shade on hover */
+  
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li a {
+  display: block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+li a:hover {
+  background-color: #0056b3; /* Slightly darker shade on hover */
+}
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+p.score {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3; /* Slightly darker shade on hover */
+}
+
+.selected-option {
+  background-color: #28a745; /* Green for selected option */
+}
+
+.correct {
+  background-color: #28a745; /* Green for correct option */
+  color: #fff;
+  font-weight: bold;
+}
+
+button#quitGame {
+  background-color: #d9534f; /* Red for Quit Game button */
+}
+
+button#edit {
+  background-color: #f0ad4e; /* Yellow for Edit button */
+}
+.triviaGameContainer{
+  display: flex;
+  flex-direction: column;
+  
+  
+}

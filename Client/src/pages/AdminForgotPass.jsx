@@ -38,14 +38,15 @@ export default function AdminForgotPass() {
       });
   };
   return (
-    <div>
-      <h2>AdminForgotPassword</h2>
+    <div className="containerStyle">
+      <h2 className="headingStyle">Admin Forgot Password</h2>
       <p>Enter Your Email Address To Reset Your Password</p>
       <input
         placeholder="Your Email Address"
         onChange={(event) => setRecipientEmail(event.target.value)}
+        className="inputStyle"
       />
-      <button title="Send Email" onClick={sendEmail} disabled={emailSent}>
+      <button title="Send Email" onClick={sendEmail} disabled={emailSent}  className="submitButtonStyle">
         Send
       </button>
       {emailSent && <h4>Email Sent Successfully</h4>}

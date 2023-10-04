@@ -5,37 +5,42 @@ export default function TriviaContextProvider({ children }) {
   const [currentQuestion, setCurrentQuestion] = useState({});
   const navigate = useNavigate();
   const [currentLevel, setCurrentLevel] = useState(0);
-  const [question, setQuestion] = useState(null);
+  const [question, setQuestion] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [points, setPoints] = useState(0);
-  const [endGame, setEndGame] = useState(false);
-  // const GetNextQuestion = async () => {
-  //   try {
-  //     let response = await fetch(
-  //       `https://finalprojectserver.onrender.com/api/triviaGame/GetNextLevelBylvl/${currentLevel}`
-  //     );
-  //     if (response.ok) {
-  //       let data = await response.json()
-  //       setCurrentQuestion(data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // };
+  const [id, setId] = useState([]);
+
   const GetNextQuestion = () => {
+    console.log(question[currentQuestionIndex]?.points || 0);
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       // Handle game completion logic here
-      setEndGame(true);
-      setQuestion(null);
-      if(endGame){
-        alert("Game Over! , Your Trivia Score Has Been Updated");
+      const confirmResult = window.confirm(
+        "Game Over! , Your Trivia Score Has Been Updated"
+      );
+      debugger;
+      if (confirmResult) {
+        const totalPoints = points + question[currentQuestionIndex]?.points;
+        setPoints(totalPoints);
+        UpdateScore(id._id, totalPoints);
+     
 
-        navigate("/TriviaGameMenu");
+        setCurrentQuestionIndex(0);
+        setPoints(0);
 
+        setQuestion(0);
+        setTimeout(() => {
+          console.log(currentQuestionIndex);
+          navigate("/TriviaGameMenu");
+        }, 2000);
+        // window.location.reload();
+      } else {
+        setCurrentQuestionIndex(0);
+        setPoints(0);
+
+        setQuestion(0);
       }
-
     }
   };
   const GetQuestion = async () => {
@@ -60,31 +65,25 @@ export default function TriviaContextProvider({ children }) {
     }
   };
   const UpdateScore = async (id, score) => {
-console.log(endGame);   
- if (endGame === true) {
-  debugger
-      try {
-        let response = await fetch(
-          "https://finalprojectserver.onrender.com/api/admin/AddPoints/",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id, type: 1, score }),
-          }
-        );
-
-        if (response.ok) {
-          let data = await response.json();
-          console.log(data);
-          setCurrentLevel((prev) => prev + 1);
+    try {
+      let response = await fetch(
+        "https://finalprojectserver.onrender.com/api/admin/AddPoints/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id, type: 1, score }),
         }
-      } catch (error) {
-        console.error(error);
+      );
+
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        setCurrentLevel((prev) => prev + 1);
       }
-    } else {
-      console.log("More Questions Left");
+    } catch (error) {
+      console.error(error);
     }
   };
   useEffect(() => {
@@ -97,10 +96,12 @@ console.log(endGame);
     currentQuestionIndex,
     question,
     points,
+    id,
+    setId,
     setPoints,
     GetQuestion,
     UpdateScore,
-    setCurrentQuestionIndex
+    setCurrentQuestionIndex,
   };
 
   return (

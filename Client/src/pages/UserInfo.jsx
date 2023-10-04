@@ -14,22 +14,18 @@ export default function UserInfo() {
   }, []);
   return (
     <>
-      <div>
-        <h1> Hello {admin?.admin?.email}</h1>
-        <h3>Trivia Score: {dataAdmin?.triviaScore}</h3>
+      <div className="containerStyle"> 
+        <h1 className="headingStyle"> Hello {admin?.admin?.email}</h1>
+        <h3 className="subHeadingStyle">Trivia Score: {dataAdmin?.triviaScore}</h3>
 
-
-        <button>
-          <Link to={"/MemoryGameMenu"}>Memory Game Menu</Link>
-        </button>
-        <button>
+        <button className="dashboardButtonStyle">
           <Link to={"/TriviaGameMenu"}>Trivia Game Menu</Link>
         </button>
-        <button>
+        <button className="dashboardButtonStyle">
           <Link to={"/BeeInfoPage"}>Bee Info Page</Link>
         </button>
 
-        <button onClick={handleLogout}>LogOut</button>
+        <button onClick={handleLogout} className="logoutButtonStyle">LogOut</button>
       </div>
     </>
   );

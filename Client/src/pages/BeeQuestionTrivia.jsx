@@ -13,18 +13,26 @@ export default function BeeQuestionTrivia() {
     setCurrentQuestionIndex,
     points,
     setPoints,
+    id,
+    GetQuestion,
+    setId,
   } = useContext(TriviaContext);
-  const [id, setId] = useState([]);
+
   const { admin, GetAdminById } = useContext(AdminContext);
 
   const [color, setColor] = useState();
   const adminID = localStorage.getItem("admin");
 
   const currentQuestion = question ? question[currentQuestionIndex] : null;
+  console.log(question);
+  console.log(currentQuestionIndex);
 
   useEffect(() => {
     setId(JSON.parse(adminID));
+    GetQuestion()
+ 
   }, []);
+
   const quitGame = () => {
     setCurrentQuestionIndex(0);
     setPoints(0);
@@ -41,11 +49,11 @@ export default function BeeQuestionTrivia() {
 
     // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
     const correctAnswer = currentQuestion.Answers[selecteAnwer];
-    console.log("dd",correctAnswer);
+    console.log("dd", correctAnswer);
     if (correctAnswer && correctAnswer.correct) {
       setColor("green");
 
-      UpdateScore(id._id, currentQuestion.points);
+      // UpdateScore(id._id, currentQuestion.points);
 
       setPoints(points + currentQuestion.points);
     } else {
@@ -60,15 +68,15 @@ export default function BeeQuestionTrivia() {
       setColor("red");
     }
 
-      GetNextQuestion();
-      setSelectdOptionIndex(null);
-  
+    GetNextQuestion();
+    setSelectdOptionIndex(null);
   };
 
   //Render the question
 
   return (
     <>
+    <div className="triviaGameContainer">
       <h1>Trivia game</h1>
       <p>Score:{points}</p>
       {currentQuestion ? (
@@ -103,6 +111,7 @@ export default function BeeQuestionTrivia() {
       {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
       <button onClick={quitGame}>Quit Game</button>
       <button>Edit</button>
+      </div>
     </>
   );
 }
