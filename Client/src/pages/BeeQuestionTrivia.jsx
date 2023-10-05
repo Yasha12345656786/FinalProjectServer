@@ -94,7 +94,7 @@ export default function BeeQuestionTrivia() {
                     ? "selected-option"
                     : selectedOptionIndex !== null && answer.correct
                     ? "correct"
-                    : ""
+                    : "incorrect"
                 }
               >
                 {answer.value}

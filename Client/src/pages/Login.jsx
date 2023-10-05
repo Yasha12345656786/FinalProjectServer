@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AdminContext } from "../Context/AdminContext";
-import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import UserInfo from "./UserInfo";
 import { Link } from "react-router-dom";
 export default function Login() {
   const [email, SetEmail] = useState("");
@@ -21,34 +19,6 @@ export default function Login() {
   
     }
   }
-
-  // async function Submit(event) {
-  //   event.preventDefault();
-
-  //   let admin = { email, password };
-  //   console.log(admin);
-  //   let res = await fetch(
-  //     `https://finalprojectserver.onrender.com/api/admin/login`,
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-
-  //       body: JSON.stringify(admin),
-  //     }
-  //   );
-  //     if(res){
-  //       navigate('/UserInfo')
-  //     }
-  //   let data = await res.json();
-
-  //   console.log(data);
-
-  //   sessionStorage.setItem('userdata',JSON.stringify(data) )
-
-  // }
   return (
     <div  className="containerStyle"> 
       <h1 className="headingStyle">Login</h1>
