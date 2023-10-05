@@ -20,7 +20,7 @@ export default function BeeQuestionTrivia() {
 
   const { admin, GetAdminById } = useContext(AdminContext);
 
-  const [color, setColor] = useState();
+  const [color, setColor] = useState("");
   const adminID = localStorage.getItem("admin");
 
   const currentQuestion = question ? question[currentQuestionIndex] : null;
@@ -44,6 +44,7 @@ export default function BeeQuestionTrivia() {
     setSelectdOptionIndex(selecteAnwer);
 
     if (!currentQuestion) {
+      
       return;
     }
 
@@ -57,15 +58,19 @@ export default function BeeQuestionTrivia() {
 
       setPoints(points + currentQuestion.points);
     } else {
-      document
-        .querySelector(`button[data-index]="${correctAnswer}`)
-        .classList.remove("correct");
+
+      // console.log(1);
+      // document
+      //   .querySelector(`button[data-index]="${correctAnswer}`)
+      //   .classList.remove("correct");
+      //   console.log(2);
       document
         .querySelector(`button[data-index]="${correctAnswer}`)
         .classList.add("incorrect");
+        console.log(3);
 
+        setColor("red");
       console.error("error");
-      setColor("red");
     }
 
     GetNextQuestion();
@@ -87,6 +92,7 @@ export default function BeeQuestionTrivia() {
               <button
                 key={index}
                 onClick={() => {
+                  setColor(color)
                   handleNextClick(index);
                 }}
                 className={
@@ -101,7 +107,6 @@ export default function BeeQuestionTrivia() {
               </button>
             ))}
           </ul>
-          {/* <button onClick={handleNextClick}>Next</button> */}
         </div>
       ) : (
         <p>Loading.....</p>

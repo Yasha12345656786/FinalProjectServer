@@ -21,7 +21,9 @@
 .trivia-score {
   font-weight: normal;
 }
-
+ֿ .selectd-option {
+  background-color: transparent;
+}
 .correct {
   background-color: green;
 }
@@ -107,7 +109,7 @@
 }
 
 .dashboardButtonStyle:hover {
-  background-color: #0056b3; /* Slightly darker shade on hover */
+  background-color: #0056b3; 
 }
 
 .logoutButtonStyle {
@@ -124,7 +126,7 @@
 }
 
 .logoutButtonStyle:hover {
-  background-color: #c9302c; /* Slightly darker shade on hover */
+  background-color: #c9302c; 
   
 }
 ul {
@@ -149,7 +151,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #0056b3; /* Slightly darker shade on hover */
+  background-color: #0056b3; 
 }
 h1 {
   font-size: 24px;
@@ -186,25 +188,26 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3; /* Slightly darker shade on hover */
+  background-color: #0056b3; 
 }
 
 .selected-option {
-  background-color: #28a745; /* Green for selected option */
+  background-color: #28a745; 
 }
 
-.correct {
-  background-color: #28a745; /* Green for correct option */
+
+ .correct {
+  background-color: #28a745; 
   color: #fff;
   font-weight: bold;
 }
 
 button#quitGame {
-  background-color: #d9534f; /* Red for Quit Game button */
+  background-color: #d9534f; 
 }
 
 button#edit {
-  background-color: #f0ad4e; /* Yellow for Edit button */
+  background-color: #f0ad4e; 
 }
 .triviaGameContainer{
   display: flex;
