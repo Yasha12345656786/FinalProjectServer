@@ -9,11 +9,14 @@ export default function TriviaContextProvider({ children }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [points, setPoints] = useState(0);
   const [id, setId] = useState([]);
+  const [selectCorrectAnswer, setSelectCorrectAnswer] = useState(null);
+
 
   const GetNextQuestion = () => {
     console.log(question[currentQuestionIndex]?.points || 0);
     if (currentQuestionIndex < question.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setSelectCorrectAnswer(null);
     } else {
       // Handle game completion logic here
       const confirmResult = window.confirm(
@@ -102,6 +105,8 @@ export default function TriviaContextProvider({ children }) {
     GetQuestion,
     UpdateScore,
     setCurrentQuestionIndex,
+    selectCorrectAnswer, 
+    setSelectCorrectAnswer
   };
 
   return (

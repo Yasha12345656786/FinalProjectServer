@@ -16,6 +16,8 @@ export default function BeeQuestionTrivia() {
     id,
     GetQuestion,
     setId,
+    selectCorrectAnswer,
+    setSelectCorrectAnswer,
   } = useContext(TriviaContext);
 
   const { admin, GetAdminById } = useContext(AdminContext);
@@ -29,8 +31,7 @@ export default function BeeQuestionTrivia() {
 
   useEffect(() => {
     setId(JSON.parse(adminID));
-    GetQuestion()
- 
+    GetQuestion();
   }, []);
 
   const quitGame = () => {
@@ -38,42 +39,28 @@ export default function BeeQuestionTrivia() {
     setPoints(0);
     navigate("/TriviaGameMenu");
   };
+
   const [selectedOptionIndex, setSelectdOptionIndex] = useState(null);
 
   const handleNextClick = (selecteAnwer) => {
     setSelectdOptionIndex(selecteAnwer);
 
     if (!currentQuestion) {
-      
       return;
     }
 
-    // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
     const correctAnswer = currentQuestion.Answers[selecteAnwer];
-    console.log("dd", correctAnswer);
-    if (correctAnswer && correctAnswer.correct) {
-      setColor("green");
+    console.log(correctAnswer);
+    if (correctAnswer.correct) {
+      console.log(selectedOptionIndex);
 
-      // UpdateScore(id._id, currentQuestion.points);
-
-      setPoints(points + currentQuestion.points);
-    } else {
-
-      // console.log(1);
-      // document
-      //   .querySelector(`button[data-index]="${correctAnswer}`)
-      //   .classList.remove("correct");
-      //   console.log(2);
-      document
-        .querySelector(`button[data-index]="${correctAnswer}`)
-        .classList.add("incorrect");
-        console.log(3);
-
-        setColor("red");
-      console.error("error");
+      setSelectCorrectAnswer(selecteAnwer);
     }
+    // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
 
-    GetNextQuestion();
+    setTimeout(() => {
+      GetNextQuestion();
+    }, 2500);
     setSelectdOptionIndex(null);
   };
 
@@ -81,41 +68,51 @@ export default function BeeQuestionTrivia() {
 
   return (
     <>
-    <div className="triviaGameContainer">
-      <h1>Trivia game</h1>
-      <p>Score:{points}</p>
-      {currentQuestion ? (
-        <div>
-          <p>{currentQuestion.q}</p>
-          <ul>
-            {currentQuestion.Answers?.map((answer, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setColor(color)
-                  handleNextClick(index);
-                }}
-                className={
-                  selectedOptionIndex === index
-                    ? "selected-option"
-                    : selectedOptionIndex !== null && answer.correct
-                    ? "correct"
-                    : "incorrect"
-                }
-              >
-                {answer.value}
-              </button>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>Loading.....</p>
-      )}
-      {/* {renderOptions()}
+      <div className="triviaGameContainer">
+        <h1>Trivia game</h1>
+        <p>Score:{points}</p>
+        {currentQuestion ? (
+          <div>
+            <p>{currentQuestion.q}</p>
+            <ul>
+              {currentQuestion.Answers?.map((answer, index) => {
+                debugger;
+                // console.log("s", selectCorrectAnswer);
+                console.log(
+                  selectCorrectAnswer === index && answer.correct ? "yes" : "np"
+                );
+                return (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      handleNextClick(index);
+                    }}
+                    className={
+                      `answerButton ${
+                        selectCorrectAnswer === index &&
+                        (answer.correct ? "correct" : "incorrect")
+                      }`
+                      // "answerButton",{
+                      // selectCorrectAnswer === index &&
+                      //   (answer.correct ? "correct" : "incorrect"}),
+                    }
+                  >
+                    {answer.value}
+                  </button>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <p>Loading.....</p>
+        )}
+        {/* {renderOptions()}
 
       {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
-      <button onClick={quitGame}>Quit Game</button>
-      <button>Edit</button>
+        <button onClick={quitGame} className="answerButton">
+          Quit Game
+        </button>
+        <button className="answerButton">Edit</button>
       </div>
     </>
   );
