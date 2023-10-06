@@ -23,7 +23,21 @@ export default function App() {
       <AdminContextProvider>
         <TriviaContextProvider>
           <PlayerContext>
-            <img src={logo} style={{ height: 100, width: 100 }} />{" "}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <img
+                src={logo}
+                style={{
+                  height: 100,
+                  width: 100,
+                }}
+              />{" "}
+            </div>
             <Routes>
               <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
               <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />

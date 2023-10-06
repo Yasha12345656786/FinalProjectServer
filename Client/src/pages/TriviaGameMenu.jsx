@@ -12,6 +12,9 @@ export default function TriviaGameMenu() {
         <li>
           <Link to="/TriviaGameLeaderboard">Leaderboard</Link>
         </li>
+        <li>
+          <Link to="/AddLevel">Add Level</Link>
+        </li>
       </ul>
     </>
   );

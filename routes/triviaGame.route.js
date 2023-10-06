@@ -12,6 +12,7 @@ TriviaRoute.get('/',async(req,res)=>{
 });
 
 TriviaRoute.post('/AddLevel',async(req,res)=>{
+    //new page 
     try {
         let {lvl} = req.body;
         let {q} = req.body;
@@ -24,6 +25,7 @@ TriviaRoute.post('/AddLevel',async(req,res)=>{
     }
 });
 TriviaRoute.put('/EditLevelByID/:id',async(req,res)=>{
+    //modal
     try {
         let {id} = req.params;
         let {lvl} = req.body;

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 import { useNavigate } from "react-router-dom";
-
+import {EditLevelModal} from "../components/EditLevelModal";
 export default function BeeQuestionTrivia() {
   const navigate = useNavigate();
   const {
@@ -50,18 +50,27 @@ export default function BeeQuestionTrivia() {
     }
 
     const correctAnswer = currentQuestion.Answers[selecteAnwer];
+
     console.log(correctAnswer);
+
     if (correctAnswer.correct) {
       console.log(selectedOptionIndex);
 
       setSelectCorrectAnswer(selecteAnwer);
     }
+    if (correctAnswer && correctAnswer.correct) {
+      // UpdateScore(id._id, currentQuestion?.points);
+      console.log("s", selectedOptionIndex);
+      setPoints(points + currentQuestion?.points);
+    } else {
+      console.log("error");
+    }
     // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
 
     setTimeout(() => {
       GetNextQuestion();
-    }, 2500);
-    setSelectdOptionIndex(null);
+      setSelectdOptionIndex(null);
+    }, 1500);
   };
 
   //Render the question
@@ -69,39 +78,84 @@ export default function BeeQuestionTrivia() {
   return (
     <>
       <div className="triviaGameContainer">
-        <h1>Trivia game</h1>
-        <p>Score:{points}</p>
+        <div
+          style={{
+            fontSize: "2em",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "1.5em",
+            }}
+          >
+            Trivia game
+          </h1>
+          <p
+            style={{
+              fontSize: "1em",
+            }}
+          >
+            Score:{points}
+          </p>
+        </div>
+        <hr></hr>
         {currentQuestion ? (
           <div>
-            <p>{currentQuestion.q}</p>
-            <ul>
-              {currentQuestion.Answers?.map((answer, index) => {
-                debugger;
-                // console.log("s", selectCorrectAnswer);
-                console.log(
-                  selectCorrectAnswer === index && answer.correct ? "yes" : "np"
-                );
-                return (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      handleNextClick(index);
-                    }}
-                    className={
-                      `answerButton ${
-                        selectCorrectAnswer === index &&
-                        (answer.correct ? "correct" : "incorrect")
-                      }`
-                      // "answerButton",{
-                      // selectCorrectAnswer === index &&
-                      //   (answer.correct ? "correct" : "incorrect"}),
+            <p
+              style={{
+                fontSize: "2em",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              {currentQuestion.q}
+            </p>
+            <div
+              style={{
+                width: "100%",
+              }}
+            >
+              <ul
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                }}
+              >
+                {currentQuestion.Answers?.map((answer, index) => {
+                  console.log("s", selectCorrectAnswer);
+                  console.log(answer.correct);
+
+                  const buttonStyle = {
+                    backgroundColor: "#007bff",
+                  };
+                  if (selectedOptionIndex !== null) {
+                    if (selectedOptionIndex === index) {
+                      if (answer.correct) {
+                        buttonStyle.backgroundColor = "green";
+                      } else buttonStyle.backgroundColor = "red";
                     }
-                  >
-                    {answer.value}
-                  </button>
-                );
-              })}
-            </ul>
+                  }
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        handleNextClick(index);
+                      }}
+                      style={buttonStyle}
+                      className="answerButton "
+                    >
+                      {answer.value}
+                    </button>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         ) : (
           <p>Loading.....</p>
@@ -109,10 +163,24 @@ export default function BeeQuestionTrivia() {
         {/* {renderOptions()}
 
       {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
-        <button onClick={quitGame} className="answerButton">
+        <button
+          onClick={quitGame}
+          className="answerButton"
+          style={{
+            backgroundColor: "#007bff",
+          }}
+        >
           Quit Game
         </button>
-        <button className="answerButton">Edit</button>
+        <button
+          onClick={<EditLevelModal/>}
+          className="answerButton"
+          style={{
+            backgroundColor: "#007bff",
+          }}
+        >
+          Edit
+        </button>
       </div>
     </>
   );

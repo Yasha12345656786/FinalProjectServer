@@ -28,7 +28,6 @@
   display: block;
   margin: 10px 0;
   padding: 10px 20px;
-  background-color: #007bff !important;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -37,10 +36,13 @@
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
 }
-.correct {
+.clrBtn {
+  background-color: #007bff;
+}
+.answerButton_correct {
   background-color: green !important;
 }
-.incorrect {
+.answerButton_incorrect {
   background-color: red !important;
 }
 .containerStyle {
@@ -198,8 +200,6 @@ ul {
   color: #fff;
   font-weight: bold;
 } */
-
 .triviaGameContainer {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 }
