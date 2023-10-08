@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
 import { AdminContext } from "../Context/AdminContext";
 import { useNavigate } from "react-router-dom";
-import {EditLevelModal} from "../components/EditLevelModal";
+// import {EditLevelModal} from "../components/EditLevelModal";
 export default function BeeQuestionTrivia() {
   const navigate = useNavigate();
   const {
@@ -173,7 +173,7 @@ export default function BeeQuestionTrivia() {
           Quit Game
         </button>
         <button
-          onClick={<EditLevelModal/>}
+          onClick={navigate("/EditLevelModal")}
           className="answerButton"
           style={{
             backgroundColor: "#007bff",

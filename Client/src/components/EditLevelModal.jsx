@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { TriviaContext } from "../Context/TriviaGameContext";
 
 export default function EditLevelModal() {
+  const [lvl, SetLevel] = useState(0);
+  const [q,SetQuestion] = useState("");
+  const [Answers,SetAnswers] = useState([]);
+  const [points,SetPoints]= useState(0);
+  const {EditLevel}=useContext(TriviaContext);
+
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -38,7 +46,7 @@ export default function EditLevelModal() {
               onChange={(event) => SetPoints(event.target.value)}
               className="inputStyle"
             />
-            <button type="submit"  className="submitButtonStyle">Submit</button>
+            <button type="submit"  className="submitButtonStyle" onClick={EditLevel()}>Submit</button>
           </form>
         </div>
       </div>

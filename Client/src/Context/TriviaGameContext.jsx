@@ -89,6 +89,52 @@ export default function TriviaContextProvider({ children }) {
       console.error(error);
     }
   };
+  const AddLevel = async(level)=>{
+    try {
+      let response = await fetch("https://finalprojectserver.onrender.com/api/triviaGame/AddPoints",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          level
+        }),
+      });
+      if (response.ok) {
+        let data = await response.json();
+        setId(data.insertedId);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const EditLevel = async(lvl,q,Answers,points)=>{
+    try {
+      let response = await fetch(`https://finalprojectserver.onrender.com/api/triviaGame//EditLevelByID/${id}`,{
+        method:"PUT",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          id,
+          lvl,
+          q,
+          Answers,
+          points
+        }),
+      });
+      if (response.ok) {
+        let data = await response.json();
+        setLvl(data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     GetQuestion();
   }, []);
@@ -106,7 +152,9 @@ export default function TriviaContextProvider({ children }) {
     UpdateScore,
     setCurrentQuestionIndex,
     selectCorrectAnswer, 
-    setSelectCorrectAnswer
+    setSelectCorrectAnswer,
+    AddLevel,
+    EditLevel
   };
 
   return (

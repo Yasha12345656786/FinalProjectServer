@@ -16,6 +16,8 @@ import AdminForgotPass from "./pages/AdminForgotPass";
 import MemoryGameMenu from "./pages/MemoryGameMenu";
 import logo from "./assets/logo.png";
 import AdminResetPass from "./pages/AdminResetPass";
+import EditLevelModal from "./components/EditLevelModal";
+import AddLevel from "./pages/AddLevel";
 export default function App() {
   const navigate = useNavigate();
   return (
@@ -52,6 +54,8 @@ export default function App() {
               />
               <Route path="/" element={<Login />} />
               <Route path="/MemoryGameMenu" element={<MemoryGameMenu />} />
+              <Route path="/EditLevelModal" element={<EditLevelModal />} />
+              <Route path="/AddLevel" element={<AddLevel />} />
               <Route
                 path="/TriviaGameMenu/BeeQuestionTrivia"
                 element={<BeeQuestionTrivia />}
