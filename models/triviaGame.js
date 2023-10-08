@@ -20,8 +20,10 @@ class TriviaGame {
     return await new DB().FindAll("TriviaGame", query);
   }
   static async AddLevel(newQuestion) {
-  
-    return await new DB().Insert("TriviaGame", newQuestion);
+    let doc = {
+      newQuestion,
+    };
+    return await new DB().Insert("TriviaGame", doc);
   }
   static async EditLevelById(id, lvl, q, Answers, points) {
     let doc = {
