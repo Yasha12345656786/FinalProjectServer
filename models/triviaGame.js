@@ -21,7 +21,7 @@ class TriviaGame {
   }
   static async AddLevel(questionData) {
     let doc = {
-      questionData,
+      questionData
     };
     return await new DB().Insert("TriviaGame", doc);
   }
