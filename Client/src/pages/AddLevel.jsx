@@ -10,7 +10,7 @@ export default function AddLevel() {
   const { AddLevel } = useContext(TriviaContext);
 
   const handleAddLevel = async (e) => {
-    e.preventDefault();
+  
     const newQuestion = {
       lvl,
       q,
