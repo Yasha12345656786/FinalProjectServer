@@ -21,15 +21,7 @@ export default function AddLevel() {
       points,
     };
     try {
-      AddLevel({
-        lvl,
-        q,
-        Answers: Answers.map((choice, index) => ({
-          value: choice,
-          correct: index === correctAnswerIndex,
-        })),
-        points,
-      });
+      AddLevel(newQuestion);
     } catch (error) {
       console.error(error);
     }
