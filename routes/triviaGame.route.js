@@ -14,7 +14,7 @@ TriviaRoute.get("/", async (req, res) => {
 TriviaRoute.post("/AddLevel", async (req, res) => {
   //new page
   try {
-    let { levalData } = req.body;
+    let  levalData  = req.body;
     let data = await triviaGame.AddLevel(levalData);
     res.status(200).json(data);
   } catch (error) {
