@@ -11,7 +11,6 @@ export default function TriviaContextProvider({ children }) {
   const [id, setId] = useState([]);
   const [selectCorrectAnswer, setSelectCorrectAnswer] = useState(null);
 
-
   const GetNextQuestion = () => {
     console.log(question[currentQuestionIndex]?.points || 0);
     if (currentQuestionIndex < question.length - 1) {
@@ -27,7 +26,6 @@ export default function TriviaContextProvider({ children }) {
         const totalPoints = points + question[currentQuestionIndex]?.points;
         setPoints(totalPoints);
         UpdateScore(id._id, totalPoints);
-     
 
         setCurrentQuestionIndex(0);
         setPoints(0);
@@ -89,17 +87,21 @@ export default function TriviaContextProvider({ children }) {
       console.error(error);
     }
   };
-  const AddLevel = async(level)=>{
+  const AddLevel = async (level) => {
+    debugger;
     try {
-      let response = await fetch("https://finalprojectserver.onrender.com/api/triviaGame/AddPoints",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          level
-        }),
-      });
+      let response = await fetch(
+        "https://finalprojectserver.onrender.com/api/triviaGame/AddLevel",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            level,
+          }),
+        }
+      );
       if (response.ok) {
         let data = await response.json();
         setId(data.insertedId);
@@ -109,22 +111,25 @@ export default function TriviaContextProvider({ children }) {
     } catch (error) {
       console.log(error);
     }
-  }
-  const EditLevel = async(lvl,q,Answers,points)=>{
+  };
+  const EditLevel = async (lvl, q, Answers, points) => {
     try {
-      let response = await fetch(`https://finalprojectserver.onrender.com/api/triviaGame//EditLevelByID/${id}`,{
-        method:"PUT",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          id,
-          lvl,
-          q,
-          Answers,
-          points
-        }),
-      });
+      let response = await fetch(
+        `https://finalprojectserver.onrender.com/api/triviaGame/EditLevelByID/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id,
+            lvl,
+            q,
+            Answers,
+            points,
+          }),
+        }
+      );
       if (response.ok) {
         let data = await response.json();
         setLvl(data);
@@ -134,7 +139,7 @@ export default function TriviaContextProvider({ children }) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   useEffect(() => {
     GetQuestion();
   }, []);
@@ -151,10 +156,10 @@ export default function TriviaContextProvider({ children }) {
     GetQuestion,
     UpdateScore,
     setCurrentQuestionIndex,
-    selectCorrectAnswer, 
+    selectCorrectAnswer,
     setSelectCorrectAnswer,
     AddLevel,
-    EditLevel
+    EditLevel,
   };
 
   return (
