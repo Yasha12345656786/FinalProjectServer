@@ -10,7 +10,6 @@ export default function AddLevel() {
   const { AddLevel } = useContext(TriviaContext);
 
   const handleAddLevel = async (e) => {
-    
     e.preventDefault();
     const newQuestion = {
       lvl,
@@ -22,7 +21,15 @@ export default function AddLevel() {
       points,
     };
     try {
-      AddLevel(newQuestion);
+      AddLevel({
+        lvl,
+        q,
+        Answers: Answers.map((choice, index) => ({
+          value: choice,
+          correct: index === correctAnswerIndex,
+        })),
+        points,
+      });
     } catch (error) {
       console.error(error);
     }
