@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import Login from "./pages/Login";
 import TriviaGameMenu from "./pages/TriviaGameMenu";
 import BeeQuestionTrivia from "./pages/BeeQuestionTrivia.jsx";
@@ -18,6 +24,8 @@ import logo from "./assets/logo.png";
 import AdminResetPass from "./pages/AdminResetPass";
 import EditLevelModal from "./components/EditLevelModal";
 import AddLevel from "./pages/AddLevel";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 export default function App() {
   const navigate = useNavigate();
   return (
@@ -32,13 +40,15 @@ export default function App() {
                 flexDirection: "column",
               }}
             >
-              <img
-                src={logo}
-                style={{
-                  height: 100,
-                  width: 100,
-                }}
-              />{" "}
+              <Link to={"/UserInfo"}>
+                <img
+                  src={logo}
+                  style={{
+                    height: 100,
+                    width: 100,
+                  }}
+                />
+              </Link>
             </div>
             <Routes>
               <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>

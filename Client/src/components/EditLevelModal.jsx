@@ -1,17 +1,18 @@
 import React, { useContext, useState } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
+// const [lvl, SetLevel] = useState(1);
+// const [q, SetQuestion] = useState("");
+// const [Answers, SetAnswers] = useState(["", "", "", ""]);
+// const [points, SetPoints] = useState(0);
+// const [correctAnswerIndex, setCorrectAnswerIndex] = useState(0);
+// const { EditLevel } = useContext(TriviaContext);
 
-export default function EditLevelModal() {
-  const [lvl, SetLevel] = useState(0);
-  const [q,SetQuestion] = useState("");
-  const [Answers,SetAnswers] = useState([]);
-  const [points,SetPoints]= useState(0);
-  const {EditLevel}=useContext(TriviaContext);
+const EditLevelModal = () => {
 
 
   return (
     <div className="modal">
-      <div className="modal-content">
+      {/* <div className="modal-content">
         <div className="modal-header">
           <h4 className="modal-title"> Edit Level</h4>
         </div>
@@ -46,10 +47,17 @@ export default function EditLevelModal() {
               onChange={(event) => SetPoints(event.target.value)}
               className="inputStyle"
             />
-            <button type="submit"  className="submitButtonStyle" onClick={EditLevel()}>Submit</button>
+            <button
+              type="submit"
+              className="submitButtonStyle"
+              onClick={EditLevel()}
+            >
+              Submit
+            </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
-}
+};
+export default EditLevelModal;
