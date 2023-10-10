@@ -21,7 +21,7 @@ export default function TriviaContextProvider({ children }) {
       const confirmResult = window.confirm(
         "Game Over! , Your Trivia Score Has Been Updated"
       );
-      debugger;
+
       if (confirmResult) {
         const totalPoints = points + question[currentQuestionIndex]?.points;
         setPoints(totalPoints);
