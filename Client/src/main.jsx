@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import setupLocatorUI from "@locator/runtime";
 import { BrowserRouter } from "react-router-dom";
+import AdminContextProvider, { AdminContext } from "./Context/AdminContext";
+
 if ("development" === "development") {
   setupLocatorUI({
     adapter: "vue",
@@ -11,6 +13,8 @@ if ("development" === "development") {
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
+    <AdminContextProvider>
+      <App />
+    </AdminContextProvider>
   </BrowserRouter>
 );

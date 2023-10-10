@@ -8,6 +8,7 @@ export default function UserInfo() {
 
   const handleLogout = () => {
     Logout();
+    localStorage.removeItem("admin");
   };
   useEffect(() => {
     GetAdminByEmail(admin?.admin?.email);

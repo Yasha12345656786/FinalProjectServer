@@ -2,13 +2,13 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export const AdminContext = createContext();
 
-
 export default function AdminContextProvider({ children }) {
-  const navigation=useNavigate();
+  const navigation = useNavigate();
   const [admin, setAdmin] = useState([]);
-  const [dataAdmin,setDataAdmin]=useState([])
+  const [dataAdmin, setDataAdmin] = useState([]);
+  const [loggeIn, setLoggeIn] = useState(false);
+
   const Login = async (email, password) => {
-  
     try {
       let response = await fetch(
         `https://finalprojectserver.onrender.com/api/admin/login`,
@@ -24,7 +24,8 @@ export default function AdminContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
-        localStorage.setItem("admin",JSON.stringify(data.admin))
+        localStorage.setItem("admin", JSON.stringify(data.admin));
+        setLoggeIn(true);
         navigation("/UserInfo");
         return true;
       }
@@ -33,12 +34,14 @@ export default function AdminContextProvider({ children }) {
       //logService.send(error)
       console.error(error);
     }
- 
   };
-  const Logout=()=>{
-    setAdmin({})
+  const Logout = () => {
+    setAdmin({});
     navigation("/");
-  }
+    setLoggeIn(false);
+    localStorage.removeItem("admin");
+    localStorage.removeItem("isLoggeIn");
+  };
   const UpdateUsername = async (username) => {
     try {
       let response = await fetch("/api/admin/updateUsername", {
@@ -67,10 +70,13 @@ export default function AdminContextProvider({ children }) {
   };
   const GetAdminById = async (id) => {
     try {
-      let response = await fetch("https://finalprojectserver.onrender.com/api/admin/getAdminById", {
-        method: "GET",
-        body: JSON.stringfy({ admin }),
-      });
+      let response = await fetch(
+        "https://finalprojectserver.onrender.com/api/admin/getAdminById",
+        {
+          method: "GET",
+          body: JSON.stringfy({ admin }),
+        }
+      );
       if (response.ok) {
         let data = await response.json();
         setAdmin(data);
@@ -84,7 +90,7 @@ export default function AdminContextProvider({ children }) {
       );
       if (response.ok) {
         let data = await response.json();
-        setDataAdmin(data)
+        setDataAdmin(data);
         return data;
       } else return null;
     } catch (error) {}
@@ -98,7 +104,8 @@ export default function AdminContextProvider({ children }) {
     UpdatePassword,
     GetAdminById,
     GetAdminByEmail,
-    Logout
+    Logout,
+    loggeIn,
   };
 
   return (
