@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
+import { useNavigate } from "react-router-dom";
 export default function AddLevel() {
   const [lvl, SetLevel] = useState(1);
   const [q, SetQuestion] = useState("");
@@ -8,7 +9,7 @@ export default function AddLevel() {
   const [points, SetPoints] = useState(0);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(0);
   const { AddLevel } = useContext(TriviaContext);
-
+const navigate = useNavigate()
   const handleAddLevel = async (e) => {
     e.preventDefault();
   
@@ -28,6 +29,7 @@ export default function AddLevel() {
         newQuestion.Answers,
         newQuestion.points
       );
+      navigate("/UserInfo")
     } catch (error) {
       console.error(error);
     }

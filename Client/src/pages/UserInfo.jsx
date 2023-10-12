@@ -6,13 +6,20 @@ export default function UserInfo() {
   const { admin, GetAdminByEmail, dataAdmin, Logout } =
     useContext(AdminContext);
 
+  const [emailAdmin, setEmailAdmin] = useState("");
+  useEffect(() => {
+    const adminData = JSON.parse(localStorage.getItem("admin"));
+
+    console.log(adminData.email);
+    setEmailAdmin(adminData.email);
+  }, []);
   const handleLogout = () => {
     Logout();
     localStorage.removeItem("admin");
   };
   useEffect(() => {
-    GetAdminByEmail(admin?.admin?.email);
-  }, []);
+    GetAdminByEmail(emailAdmin);
+  }, [emailAdmin]);
   return (
     <>
       <div className="containerStyle">

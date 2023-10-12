@@ -25,7 +25,10 @@ export default function AdminContextProvider({ children }) {
         let data = await response.json();
         setAdmin(data);
         localStorage.setItem("admin", JSON.stringify(data.admin));
-        setLoggeIn(true);
+        if (localStorage.getItem("admin") !== null) {
+          setLoggeIn(true);
+        }
+
         navigation("/UserInfo");
         return true;
       }
@@ -106,6 +109,7 @@ export default function AdminContextProvider({ children }) {
     GetAdminByEmail,
     Logout,
     loggeIn,
+    setLoggeIn
   };
 
   return (

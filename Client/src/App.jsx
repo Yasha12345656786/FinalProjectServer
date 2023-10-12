@@ -27,10 +27,14 @@ import AddLevel from "./pages/AddLevel";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
-  const { loggeIn } = useContext(AdminContext);
+  const { loggeIn,setLoggeIn } = useContext(AdminContext);
   const navigate = useNavigate();
   console.log(loggeIn);
-
+  useEffect(()=>{
+    if (localStorage.getItem("admin") !== null) {
+      setLoggeIn(true);
+    }
+  },[])
   return (
     <>
       <TriviaContextProvider>

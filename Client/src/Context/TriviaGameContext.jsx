@@ -108,6 +108,7 @@ export default function TriviaContextProvider({ children }) {
       if (response.ok) {
         let data = await response.json();
         setId(data.insertedId);
+        alert('Level Has Bee Added')
         return true;
       }
       return false;
