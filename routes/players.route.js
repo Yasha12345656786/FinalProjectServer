@@ -1,5 +1,6 @@
 const Player = require("../models/player");
 const PlayersRoute = require("express").Router();
+const bcrypt = require("bcrypt");
 
 PlayersRoute.get("/", async (req, res) => {
   try {
@@ -85,15 +86,17 @@ PlayersRoute.post("/AddUser", async (req, res) => {
     let { username } = req.body;
     let { email } = req.body;
     let { password } = req.body;
-    
+
     let { triviaScore } = Number(0);
     let { memoryScore } = Number(0);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     let data = await Player.AddNewPlayer(
       first_name,
       last_name,
       username,
       email,
-      password,
+      hashedPassword,
       (triviaScore = 0),
       (memoryScore = 0)
     );
@@ -113,11 +116,12 @@ PlayersRoute.post("/register", async (req, res) => {
       triviaScore,
       memoryScore,
     } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     let newPlayer = await Player.Register(
       first_name,
       last_name,
       email,
-      password,
+      hashedPassword,
       username,
       triviaScore,
       memoryScore
