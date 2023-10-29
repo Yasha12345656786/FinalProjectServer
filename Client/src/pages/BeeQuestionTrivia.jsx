@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
-import { AdminContext } from "../Context/AdminContext";
 import { useNavigate } from "react-router-dom";
-// import {EditLevelModal} from "../components/EditLevelModal";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-// import EditLevelModal from "../components/EditLevelModal";
+
 
 export default function BeeQuestionTrivia() {
   const [lvl, SetLevel] = useState(null);
@@ -17,11 +15,9 @@ export default function BeeQuestionTrivia() {
     question,
     currentQuestionIndex,
     GetNextQuestion,
-    UpdateScore,
     setCurrentQuestionIndex,
     points,
     setPoints,
-    id,
     GetQuestion,
     setId,
     selectCorrectAnswer,
@@ -32,14 +28,9 @@ export default function BeeQuestionTrivia() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { admin, GetAdminById } = useContext(AdminContext);
 
-  const [color, setColor] = useState("");
   const adminID = localStorage.getItem("admin");
-  console.log(question);
   const currentQuestion = question ? question[currentQuestionIndex] : null;
-  console.log(question);
-  console.log(currentQuestionIndex);
 
   useEffect(() => {
     setId(JSON.parse(adminID));
@@ -71,13 +62,10 @@ export default function BeeQuestionTrivia() {
       setSelectCorrectAnswer(selecteAnwer);
     }
     if (correctAnswer && correctAnswer.correct) {
-      // UpdateScore(id._id, currentQuestion?.points);
-      console.log("s", selectedOptionIndex);
       setPoints(points + currentQuestion?.points);
     } else {
       console.log("error");
     }
-    // const correctAnswer = currentQuestion.Answers.find((answer) => answer.correct);
 
     setTimeout(() => {
       GetNextQuestion();
@@ -97,7 +85,6 @@ export default function BeeQuestionTrivia() {
       points,
     };
     try {
-      console.log(newQuestion);
       EditLevel(
         currentQuestion._id,
         newQuestion.lvl,
@@ -112,7 +99,6 @@ export default function BeeQuestionTrivia() {
     }
   };
 
-  //Render the question
 
   return (
     <>
@@ -199,9 +185,6 @@ export default function BeeQuestionTrivia() {
         ) : (
           <p>Loading.....</p>
         )}
-        {/* {renderOptions()}
-
-      {!currentQuestion.lvl ? <div>loading</div> :  renderQuestion()} */}
         <button
           onClick={quitGame}
           className="answerButton"

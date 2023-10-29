@@ -105,32 +105,6 @@ PlayersRoute.post("/AddUser", async (req, res) => {
     res.status(500).json({ error });
   }
 });
-PlayersRoute.post("/register", async (req, res) => {
-  try {
-    let {
-      first_name,
-      last_name,
-      email,
-      password,
-      username,
-      triviaScore,
-      memoryScore,
-    } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    let newPlayer = await Player.Register(
-      first_name,
-      last_name,
-      email,
-      hashedPassword,
-      username,
-      triviaScore,
-      memoryScore
-    );
-    res.status(201).json(newPlayer);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-});
 PlayersRoute.post("/login", async (req, res) => {
   console.log(req);
   try {
