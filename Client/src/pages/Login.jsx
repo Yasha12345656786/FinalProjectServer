@@ -39,7 +39,7 @@ export default function Login() {
         />
         <button type="submit"  className="submitButtonStyle">Login</button>
       </form>
-      <button className="forgotPasswordButtonStyle">  <Link to="/AdminForgotPassword" className="linkStyle">Forgot Pass?</Link> </button>
+      <button className="forgotPasswordButtonStyle">  <Link to="/AdminForgotPass" className="linkStyle">Forgot Pass?</Link> </button>
     </div>
   );
 }

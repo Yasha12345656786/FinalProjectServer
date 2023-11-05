@@ -105,11 +105,11 @@ export default function App() {
                   element={<TriviaGameLeaderBoard />}
                 />
                 <Route
-                  path="/AdminForgotPassword"
+                  path="/AdminForgotPass"
                   element={<AdminForgotPass />}
                 />
                 <Route
-                  path="/AdminResetPassword"
+                  path="/AdminResetPass"
                   element={<AdminResetPass />}
                 />
               </>
