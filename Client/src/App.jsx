@@ -27,14 +27,14 @@ import AddLevel from "./pages/AddLevel";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
-  const { loggeIn,setLoggeIn } = useContext(AdminContext);
+  const { loggeIn, setLoggeIn } = useContext(AdminContext);
   const navigate = useNavigate();
   console.log(loggeIn);
-  useEffect(()=>{
+  useEffect(() => {
     if (localStorage.getItem("admin") !== null) {
       setLoggeIn(true);
     }
-  },[])
+  }, []);
   return (
     <>
       <TriviaContextProvider>
@@ -104,17 +104,16 @@ export default function App() {
                   path="/TriviaGameLeaderBoard"
                   element={<TriviaGameLeaderBoard />}
                 />
-                <Route
-                  path="/AdminForgotPass"
-                  element={<AdminForgotPass />}
-                />
-                <Route
-                  path="/AdminResetPass"
-                  element={<AdminResetPass />}
-                />
+                <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
+                <Route path="/AdminResetPass" element={<AdminResetPass />} />
               </>
             ) : (
-              <Route path="/" element={<Login />} />
+              <>
+                <Route path="/" element={<Login />} />
+                <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
+                <Route path="/AdminResetPass" element={<AdminResetPass />} />
+
+              </>
             )}
           </Routes>
         </PlayerContext>

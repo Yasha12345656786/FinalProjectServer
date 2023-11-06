@@ -5,9 +5,10 @@ export default function AdminResetPass() {
   const [password, SetPassword] = useState("");
 
   const handleResetPassword = async () => {
+    debugger;
     try {
-      let res = await fetch(
-        "https://finalprojectserver.onrender.com/api/admin/updatePassword",
+      const res = await fetch(
+        "http://localhost:5500/api/admin/updatePassword",
         {
           method: "POST",
           headers: {
@@ -18,14 +19,16 @@ export default function AdminResetPass() {
           body: JSON.stringify({ email, password }),
         }
       );
-      if (res.ok) {
-        alert("update");
-      } else {
-        alert("fail");
-      }
 
-      console.log(data);
+      if (res.ok) {
+        let data = await res.json();
+        alert('Password Has Been Changed')
+        console.log(data);
+        navigation("/");
+        return true;
+      }
     } catch (error) {
+      alert('Something Went Wrong')
       console.error(error);
     }
   };
