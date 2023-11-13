@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "buildClient": "cd Client && pnpm install && pnpm run build",
-    "build": "pnpm install && pnpm run buildClient"
+    "buildClient": "cd Client && npm install && npm run build",
+    "build": "npm install && npm run buildClient"
   },
   "keywords": [],
   "author": "",
