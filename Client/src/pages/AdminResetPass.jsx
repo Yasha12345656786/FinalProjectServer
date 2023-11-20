@@ -8,7 +8,7 @@ export default function AdminResetPass() {
     debugger;
     try {
       const res = await fetch(
-        "http://localhost:5500/api/admin/updatePassword",
+        "https://finalprojectserver.onrender.com/api/admin/updatePassword",
         {
           method: "POST",
           headers: {

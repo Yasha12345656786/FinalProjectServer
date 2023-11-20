@@ -1,6 +1,6 @@
 const Admin = require("../models/Admin");
 const AdminsRoute = require("express").Router();
-
+const bcrypt = require("bcrypt");
 AdminsRoute.post("/login", async (req, res) => {
   try {
     let { email, password } = req.body;
@@ -78,15 +78,22 @@ AdminsRoute.put("/updateEmail", async (req, res) => {
 });
 AdminsRoute.post("/updatePassword", async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const admin = await Admin.GetAdminByEmail(email);
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      res.status(500).send("Error hashing");
+      return;
+    }
+
+    const admin = Admin.GetAdminByEmail(email);
     if (!admin) {
       return res.status(404).json({ message: "User Wasn't Found, Try Again" });
     }
-    await Admin.UpdateAdminsPassword(admin._id, password);
+    if (admin) {
+      Admin.UpdateAdminsPassword(admin._id, hash);
+    }
+
     res.status(200).json({ message: "password update" });
-  } catch (error) {
-    res.status(500).json({ error });
-  }
+  });
 });
+
 module.exports = AdminsRoute;
