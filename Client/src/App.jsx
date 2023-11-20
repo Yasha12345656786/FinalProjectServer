@@ -72,7 +72,7 @@ export default function App() {
           <Routes>
             {loggeIn ? (
               <>
-                <Route path="/" element={<UserInfo />} />
+                <Route path="/UserInfo" element={<UserInfo />} />
                 <Route path="/BeeInfoPage" element={<BeeInfoPage />}></Route>
                 <Route path="TriviaGameMenu" element={<TriviaGameMenu />} />
 
@@ -106,14 +106,8 @@ export default function App() {
                 />
                 <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
                 <Route path="/AdminResetPass" element={<AdminResetPass />} />
-                <Route
-                  path="*"
-                  element={
-                    <>
-                      <h1> Page not found</h1>
-                    </>
-                  }
-                />
+               
+           
               </>
             ) : (
               <>

@@ -57,26 +57,19 @@ PlayersRoute.put("/updateUsername", async (req, res) => {
 });
 PlayersRoute.post("/updatePassword", async (req, res) => {
   const { email, password } = req.body;
-  try {
+  try{
+    const hash=await bcrypt.hash(password,10)
     const player = await Player.FindByEmail(email);
     if (!player) {
-      return res
-        .status(404)
-        .json({ message: "Player Wasn't found, Try Again" });
+      return res.status(404).json({ message: "User Wasn't Found, Try Again" });
     }
-    await Player.UpdatePlayersPassword(player._id, password);
+    await Admin.UpdateAdminsPassword(admin._id,hash)
     res.status(200).json({ message: "password update" });
-  } catch (error) {
-    res.status(500).json({ error });
+
+  }catch(err){
+    res.status(500).send("Error hashing");
   }
 
-  //   try {
-  //     let data = await Player.UpdatePlayersPasswordEmail(email, password);
-  //     console.log(data)
-  //     res.status(200).json(data);
-  //   } catch (error) {
-  //     res.status(500).json({ error });
-  //   }
 });
 PlayersRoute.post("/AddUser", async (req, res) => {
   console.log(req);
