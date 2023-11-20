@@ -22,7 +22,7 @@ export default function TriviaGameLeaderBoard() {
       <div className="leaderboard-container">
         {leaderboardData.map((data, index) => (
           <div  className="leaderboard-item" key={index}>
-            <span className="username">{index}. {data.username}</span>
+            <span className="username">{index+1}. {data.username}</span>
             <span  className="trivia-score">{data.triviaScore}</span>
           </div>
         ))}
