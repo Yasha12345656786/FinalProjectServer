@@ -63,7 +63,7 @@ PlayersRoute.post("/updatePassword", async (req, res) => {
     if (!player) {
       return res.status(404).json({ message: "User Wasn't Found, Try Again" });
     }
-    await Admin.UpdateAdminsPassword(admin._id,hash)
+    await Player.UpdatePlayersPassword(player._id,hash)
     res.status(200).json({ message: "password update" });
 
   }catch(err){
