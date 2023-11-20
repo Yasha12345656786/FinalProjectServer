@@ -18,7 +18,7 @@ export default function AdminForgotPass() {
       template_params: {
         to_email: recipientEmail, // Replace with the recipient's email address
         subject: "Click The Link Below To Reset Your Password:",
-        message: "https://finalprojectserver.onrender.com/AdminResetPassword",
+        message: "https://finalprojectserver.onrender.com/AdminResetPass",
       },
     };
     // Send the email

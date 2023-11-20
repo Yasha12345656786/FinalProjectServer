@@ -104,8 +104,8 @@ export default function App() {
                   path="/TriviaGameLeaderBoard"
                   element={<TriviaGameLeaderBoard />}
                 />
-
-               
+                <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
+                <Route path="/AdminResetPass" element={<AdminResetPass />} />
                 <Route
                   path="*"
                   element={
@@ -117,6 +117,7 @@ export default function App() {
               </>
             ) : (
               <>
+              
                 <Route path="/" element={<Login />} />
                 <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
                 <Route path="/AdminResetPass" element={<AdminResetPass />} />

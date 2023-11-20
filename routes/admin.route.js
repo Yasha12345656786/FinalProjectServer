@@ -78,22 +78,19 @@ AdminsRoute.put("/updateEmail", async (req, res) => {
 });
 AdminsRoute.post("/updatePassword", async (req, res) => {
   const { email, password } = req.body;
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) {
-      res.status(500).send("Error hashing");
-      return;
-    }
-
-    const admin = Admin.GetAdminByEmail(email);
+  try{
+    const hash=await bcrypt.hash(password,10)
+    const admin = await Admin.GetAdminByEmail(email);
     if (!admin) {
       return res.status(404).json({ message: "User Wasn't Found, Try Again" });
     }
-    if (admin) {
-      Admin.UpdateAdminsPassword(admin._id, hash);
-    }
-
+    await Admin.UpdateAdminsPassword(admin._id,hash)
     res.status(200).json({ message: "password update" });
-  });
+
+  }catch(err){
+    res.status(500).send("Error hashing");
+  }
+
 });
 
 module.exports = AdminsRoute;

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function AdminResetPass() {
+  const navigation = useNavigate();
+
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
+  debugger;
 
   const handleResetPassword = async () => {
-    debugger;
+
     try {
       const res = await fetch(
         "https://finalprojectserver.onrender.com/api/admin/updatePassword",
@@ -46,7 +49,7 @@ export default function AdminResetPass() {
         placeholder="New Password"
         value={password}
         onChange={(e) => SetPassword(e.target.value)}
-      />
+      /> 
       <button onClick={handleResetPassword}>Reset Password</button>
     </div>
   );
