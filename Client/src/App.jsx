@@ -115,6 +115,14 @@ export default function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="/AdminForgotPass" element={<AdminForgotPass />} />
                 <Route path="/AdminResetPass" element={<AdminResetPass />} />
+                <Route
+                  path="/PlayerForgotPassword"
+                  element={<ForgotPassword />}
+                />
+                <Route
+                  path="/PlayerForgotUsername"
+                  element={<ForgotUsername />}
+                />
               </>
             )}
           </Routes>
