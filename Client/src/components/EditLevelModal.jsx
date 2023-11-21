@@ -1,11 +1,6 @@
 import React, { useContext, useState } from "react";
 import { TriviaContext } from "../Context/TriviaGameContext";
-// const [lvl, SetLevel] = useState(1);
-// const [q, SetQuestion] = useState("");
-// const [Answers, SetAnswers] = useState(["", "", "", ""]);
-// const [points, SetPoints] = useState(0);
-// const [correctAnswerIndex, setCorrectAnswerIndex] = useState(0);
-// const { EditLevel } = useContext(TriviaContext);
+
 
 const EditLevelModal = () => {
 
